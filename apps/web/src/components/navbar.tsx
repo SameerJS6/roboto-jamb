@@ -20,17 +20,17 @@ const fetcher = async (url: string): Promise<NavigationData> => {
 
 function NavbarSkeleton() {
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm">
-      <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex h-[45px] w-[108px] items-center">
-            <div className="h-[45px] w-[108px] animate-pulse rounded bg-muted/50" />
+    <header className="sticky top-0 z-40 w-full">
+      <div className="container mx-auto px-4 py-6">
+        <div className="flex items-center justify-between">
+          <div className="flex aspect-[2.4] w-[90px] items-center sm:w-[108px]">
+            <div className="h-full w-full animate-pulse bg-muted/50" />
           </div>
 
           <div className="flex items-center gap-2 sm:gap-5 lg:gap-7">
-            <div className="size-10 animate-pulse rounded bg-muted/50" />
-            <div className="size-10 animate-pulse rounded bg-muted/50" />
-            <div className="size-10 animate-pulse rounded bg-muted/50" />
+            <div className="size-10 animate-pulse bg-muted/50" />
+            <div className="size-10 animate-pulse bg-muted/50" />
+            <div className="size-10 animate-pulse bg-muted/50" />
           </div>
         </div>
       </div>
