@@ -4,8 +4,8 @@ import { queryRedirects } from "@/lib/sanity/query";
 
 const nextConfig: NextConfig = {
   transpilePackages: ["@workspace/ui"],
+  reactCompiler: true,
   experimental: {
-    reactCompiler: true,
     inlineCss: true,
   },
   logging: {
@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
   images: {
     minimumCacheTTL: 31_536_000,
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
       {
         protocol: "https",
         hostname: "cdn.sanity.io",
