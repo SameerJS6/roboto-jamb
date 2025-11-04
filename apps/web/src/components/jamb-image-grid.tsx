@@ -2,22 +2,24 @@
 
 import { cn } from "@workspace/ui/lib/utils";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type JambImageGridProps = {
   features: {
     icon: string;
     iconAlt: string;
+    truncateTitle?: boolean;
     title: string;
     description: string;
   }[];
-  expandSingleOrDouble?: boolean;
   maxDescriptionLength?: number;
 };
 
+const PLACEHOLDER_IMAGE = "https://placehold.co/300x300/png";
+
 function DescriptionWithReadMore({
   description,
-  maxLength = 150,
+  maxLength = 50,
 }: {
   description: string;
   maxLength?: number;
@@ -45,54 +47,79 @@ function DescriptionWithReadMore({
   );
 }
 
+function FeatureImage({ src, alt }: { src: string; alt: string }) {
+  const [imageSrc, setImageSrc] = useState(src || PLACEHOLDER_IMAGE);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    if (src) {
+      setImageSrc(src);
+      setHasError(false);
+    } else {
+      setImageSrc(PLACEHOLDER_IMAGE);
+      setHasError(false);
+    }
+  }, [src]);
+
+  const handleError = () => {
+    if (!hasError) {
+      setHasError(true);
+      setImageSrc(PLACEHOLDER_IMAGE);
+    }
+  };
+
+  return (
+    <Image
+      alt={alt}
+      className="aspect-square w-full object-contain"
+      height={300}
+      onError={handleError}
+      src={imageSrc}
+      width={300}
+    />
+  );
+}
+
 export default function JambImageGrid({
   features,
-  expandSingleOrDouble = false,
-  maxDescriptionLength = 150,
+  maxDescriptionLength = 55,
 }: JambImageGridProps) {
   return (
-    <section className="container mx-auto space-y-12 bg-muted sm:space-y-14 lg:space-y-16">
-      <h3 className="text-balance text-center font-medium text-2xl capitalize leading-[18px]">
-        our latest furniture
-      </h3>
+    <section className="bg-muted py-9">
+      <div className="container mx-auto space-y-12 px-4 sm:space-y-14 sm:px-6 lg:space-y-16 lg:px-8">
+        <h3 className="text-balance text-center font-medium text-2xl capitalize leading-[18px]">
+          our latest furniture
+        </h3>
 
-      <div className="flex flex-wrap items-start justify-center gap-6 md:gap-10">
-        {features?.map((feature, index) => (
-          <div
-            className={cn(
-              "flex h-full flex-col items-center justify-start gap-4 text-center max-sm:basis-full sm:basis-[calc(50%-0.75rem)] md:basis-[calc(33.333%-1.67rem)] lg:basis-[calc(25%-1.875rem)] xl:max-w-[calc((100%-10rem)/5)] xl:flex-[0_1_auto]",
-              expandSingleOrDouble &&
-                features.length === 1 &&
-                "!basis-full !max-w-full",
-              expandSingleOrDouble &&
-                features.length === 2 &&
-                "xl:max-w-[45%] xl:basis-[45%]"
-            )}
-            key={`jamb-image-grid-feature-${feature.title}-${index}`}
-          >
-            <Image
-              alt={feature.iconAlt ?? ""}
-              className="aspect-square size-full flex-shrink-0 rounded-full object-contain"
-              height={300}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                // target.style.display = "none";
-                target.src = "https://placehold.co/300x300/png"
-              }}
-              src={feature.icon ?? ""}
-              width={300}
-            />
-            <div className="flex flex-1 flex-col items-center justify-center gap-1">
-              <h3 className="mt-2.5 font-bold text-base text-h3 leading-[25px]">
-                {feature.title}
-              </h3>
-              <DescriptionWithReadMore
-                description={feature.description}
-                maxLength={maxDescriptionLength}
-              />
+        <div className="grid grid-cols-1 justify-center gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-10 lg:grid-cols-4 xl:grid-cols-5">
+          {features?.map((feature, index) => (
+            <div
+              className="flex min-w-0 flex-col items-center justify-start gap-4 text-center"
+              key={`jamb-image-grid-feature-${feature.title}-${index}`}
+            >
+              <div className="aspect-square w-full shrink-0">
+                <FeatureImage
+                  alt={feature.iconAlt ?? ""}
+                  src={feature.icon ?? ""}
+                />
+              </div>
+              <div className="flex w-full min-w-0 flex-1 flex-col items-center justify-center gap-1">
+                <h3
+                  className={cn(
+                    "mt-2.5 w-full min-w-0 break-words font-bold text-base text-h3 leading-[25px]",
+                    feature?.truncateTitle && "line-clamp-2"
+                  )}
+                >
+                  {feature.title}
+                </h3>
+                <DescriptionWithReadMore
+                  description={feature.description}
+                  maxLength={maxDescriptionLength}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
