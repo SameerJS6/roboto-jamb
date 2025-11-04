@@ -106,11 +106,11 @@ export function Navbar({
                   cy="10.1404"
                   r="9.39035"
                   stroke="#9C9C9D"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                 />
                 <line
                   stroke="#9C9C9D"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   x1="16.0391"
                   x2="24.39"
                   y1="17.3644"
@@ -133,7 +133,7 @@ export function Navbar({
                 <rect
                   height="21.1667"
                   stroke="#9C9C9D"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   width="30.7105"
                   x="0.75"
                   y="0.75"
@@ -141,7 +141,7 @@ export function Navbar({
                 <path
                   d="M3.57892 4.77197L15.5087 13.7193L28.6315 4.77197"
                   stroke="#9C9C9D"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                 />
               </svg>
             </Button>
@@ -159,14 +159,14 @@ export function Navbar({
               >
                 <line
                   stroke="#9C9C9D"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   x2="31.0175"
                   y1="0.75"
                   y2="0.75"
                 />
                 <line
                   stroke="#9C9C9D"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   x1="6.10352e-05"
                   x2="31.0176"
                   y1="11.4868"
@@ -174,7 +174,7 @@ export function Navbar({
                 />
                 <line
                   stroke="#9C9C9D"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   x1="6.10352e-05"
                   x2="31.0176"
                   y1="22.2236"
