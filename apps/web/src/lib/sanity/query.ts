@@ -297,6 +297,57 @@ export const queryGenericPageOGData = defineQuery(`
   }
 `);
 
+export const queryJambFooterData = defineQuery(`
+  *[_type == "jambFooter" && _id == "jambFooter"][0]{
+    _id,
+    _type,
+    _createdAt,
+    _updatedAt,
+    contactInfo {
+      _type,
+      phone,
+      addressLine1,
+      addressLine2,
+      email
+    },
+    newsletter {
+      _type,
+      title,
+      inputPlaceholder,
+      buttonText,
+      privacyText,
+      "privacyPolicyLink": select(
+        defined(privacyPolicyLink.url.type) => select(
+          privacyPolicyLink.url.type == "internal" => privacyPolicyLink.url.internal->slug.current,
+          privacyPolicyLink.url.type == "external" => privacyPolicyLink.url.external,
+          ""
+        ),
+        ""
+      )
+    },
+    columns[]{
+      _key,
+      _type,
+      sections[]{
+        _key,
+        _type,
+        title,
+        isStandalone,
+        links[]{
+          _key,
+          _type,
+          label,
+          "href": select(
+            url.type == "internal" => url.internal->slug.current,
+            url.type == "external" => url.external,
+            url.href
+          )
+        }
+      }
+    }
+  }
+`);
+
 export const queryFooterData = defineQuery(`
   *[_type == "footer" && _id == "footer"][0]{
     _id,
