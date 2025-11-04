@@ -57,7 +57,7 @@ export type SubscribeNewsletter = {
 export type ImageLinkCards = {
   _type: "imageLinkCards";
   eyebrow?: string;
-  title: string;
+  title?: string;
   richText?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -80,8 +80,8 @@ export type ImageLinkCards = {
     _key: string;
   } & Button>;
   cards?: Array<{
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
     image?: {
       asset?: {
         _ref: string;
@@ -103,14 +103,14 @@ export type ImageLinkCards = {
 export type FaqAccordion = {
   _type: "faqAccordion";
   eyebrow?: string;
-  title: string;
+  title?: string;
   subtitle?: string;
   link?: {
     title?: string;
     description?: string;
     url?: CustomUrl;
   };
-  faqs: Array<{
+  faqs?: Array<{
     _ref: string;
     _type: "reference";
     _weak?: boolean;
@@ -293,9 +293,47 @@ export type Redirect = {
   _updatedAt: string;
   _rev: string;
   status?: "active" | "inactive";
-  source: Slug;
-  destination: Slug;
+  source?: Slug;
+  destination?: Slug;
   permanent?: "true" | "false";
+};
+
+export type JambFooter = {
+  _id: string;
+  _type: "jambFooter";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  label?: string;
+  contactInfo?: {
+    phone?: string;
+    addressLine1?: string;
+    addressLine2?: string;
+    email?: string;
+  };
+  newsletter?: {
+    title?: string;
+    inputPlaceholder?: string;
+    buttonText?: string;
+    privacyText?: string;
+    privacyPolicyLink?: CustomUrl;
+  };
+  columns?: Array<{
+    sections?: Array<{
+      title?: string;
+      links?: Array<{
+        label?: string;
+        url?: CustomUrl;
+        _type: "footerLink";
+        _key: string;
+      }>;
+      isStandalone?: boolean;
+      _type: "footerSection";
+      _key: string;
+    }>;
+    _type: "footerColumn";
+    _key: string;
+  }>;
 };
 
 export type Navbar = {
@@ -304,10 +342,10 @@ export type Navbar = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  label: string;
+  label?: string;
   columns?: Array<{
     title?: string;
-    links: Array<{
+    links?: Array<{
       icon?: IconPicker;
       name?: string;
       description?: string;
@@ -334,7 +372,7 @@ export type Footer = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  label: string;
+  label?: string;
   subtitle?: string;
   columns?: Array<{
     title?: string;
@@ -355,9 +393,9 @@ export type Settings = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  label: string;
-  siteTitle: string;
-  siteDescription: string;
+  label?: string;
+  siteTitle?: string;
+  siteDescription?: string;
   logo?: {
     asset?: {
       _ref: string;
@@ -388,7 +426,7 @@ export type BlogIndex = {
   _rev: string;
   title?: string;
   description?: string;
-  slug: Slug;
+  slug?: Slug;
   displayFeaturedBlogs?: "yes" | "no";
   featuredBlogsCount?: "1" | "2" | "3";
   pageBuilder?: PageBuilder;
@@ -418,7 +456,7 @@ export type HomePage = {
   _rev: string;
   title?: string;
   description?: string;
-  slug: Slug;
+  slug?: Slug;
   pageBuilder?: PageBuilder;
   seoTitle?: string;
   seoDescription?: string;
@@ -444,7 +482,7 @@ export type Author = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name: string;
+  name?: string;
   position?: string;
   image?: {
     asset?: {
@@ -467,7 +505,7 @@ export type Faq = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
+  title?: string;
   richText?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -494,9 +532,9 @@ export type Page = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
+  title?: string;
   description?: string;
-  slug: Slug;
+  slug?: Slug;
   image?: {
     asset?: {
       _ref: string;
@@ -536,10 +574,10 @@ export type Blog = {
   _updatedAt: string;
   _rev: string;
   orderRank?: string;
-  title: string;
+  title?: string;
   description?: string;
-  slug: Slug;
-  authors: Array<{
+  slug?: Slug;
+  authors?: Array<{
     _ref: string;
     _type: "reference";
     _weak?: boolean;
@@ -547,7 +585,7 @@ export type Blog = {
     [internalGroqTypeReferenceTo]?: "author";
   }>;
   publishedAt?: string;
-  image: {
+  image?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -582,7 +620,7 @@ export type Blog = {
 
 export type CustomUrl = {
   _type: "customUrl";
-  type: "internal" | "external";
+  type?: "internal" | "external";
   openInNewTab?: boolean;
   external?: string;
   href?: string;
@@ -640,7 +678,7 @@ export type SanityAssistOutputField = {
 
 export type SanityAssistInstructionContext = {
   _type: "sanity.assist.instruction.context";
-  reference: {
+  reference?: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
@@ -673,7 +711,7 @@ export type AssistInstructionContext = {
 
 export type SanityAssistInstructionUserInput = {
   _type: "sanity.assist.instruction.userInput";
-  message: string;
+  message?: string;
   description?: string;
 };
 
@@ -848,7 +886,7 @@ export type Geopoint = {
 
 export type Slug = {
   _type: "slug";
-  current: string;
+  current?: string;
   source?: string;
 };
 
@@ -859,7 +897,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = SubscribeNewsletter | ImageLinkCards | FaqAccordion | FeatureCardsIcon | Cta | Hero | PageBuilder | Button | RichText | Redirect | Navbar | Footer | Settings | BlogIndex | HomePage | Author | Faq | Page | Blog | CustomUrl | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | IconPicker | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = SubscribeNewsletter | ImageLinkCards | FaqAccordion | FeatureCardsIcon | Cta | Hero | PageBuilder | Button | RichText | Redirect | JambFooter | Navbar | Footer | Settings | BlogIndex | HomePage | Author | Faq | Page | Blog | CustomUrl | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | IconPicker | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../web/src/lib/sanity/query.ts
 // Variable: queryImageType
@@ -888,7 +926,7 @@ export type QueryHomePageDataResult = {
   _rev: string;
   title: string | null;
   description: string | null;
-  slug: string;
+  slug: string | null;
   pageBuilder: Array<{
     _key: string;
     _type: "cta";
@@ -930,7 +968,7 @@ export type QueryHomePageDataResult = {
     _key: string;
     _type: "faqAccordion";
     eyebrow?: string;
-    title: string;
+    title?: string;
     subtitle?: string;
     link: {
       title?: string;
@@ -940,7 +978,7 @@ export type QueryHomePageDataResult = {
       href: string | null;
     } | null;
     faqs: Array<{
-      title: string;
+      title: string | null;
       _id: string;
       _type: "faq";
       richText: Array<{
@@ -967,7 +1005,7 @@ export type QueryHomePageDataResult = {
         _type: "block";
         _key: string;
       }> | null;
-    }>;
+    }> | null;
   } | {
     _key: string;
     _type: "featureCardsIcon";
@@ -1082,7 +1120,7 @@ export type QueryHomePageDataResult = {
     _key: string;
     _type: "imageLinkCards";
     eyebrow?: string;
-    title: string;
+    title?: string;
     richText: Array<{
       children?: Array<{
         marks?: Array<string>;
@@ -1116,8 +1154,8 @@ export type QueryHomePageDataResult = {
       href: string | null;
     }> | null;
     cards: Array<{
-      title: string;
-      description: string;
+      title?: string;
+      description?: string;
       image: {
         id: string | null;
         preview: string | null;
@@ -1216,9 +1254,9 @@ export type QuerySlugPageDataResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
+  title?: string;
   description?: string;
-  slug: string;
+  slug: string | null;
   image?: {
     asset?: {
       _ref: string;
@@ -1272,7 +1310,7 @@ export type QuerySlugPageDataResult = {
     _key: string;
     _type: "faqAccordion";
     eyebrow?: string;
-    title: string;
+    title?: string;
     subtitle?: string;
     link: {
       title?: string;
@@ -1282,7 +1320,7 @@ export type QuerySlugPageDataResult = {
       href: string | null;
     } | null;
     faqs: Array<{
-      title: string;
+      title: string | null;
       _id: string;
       _type: "faq";
       richText: Array<{
@@ -1309,7 +1347,7 @@ export type QuerySlugPageDataResult = {
         _type: "block";
         _key: string;
       }> | null;
-    }>;
+    }> | null;
   } | {
     _key: string;
     _type: "featureCardsIcon";
@@ -1424,7 +1462,7 @@ export type QuerySlugPageDataResult = {
     _key: string;
     _type: "imageLinkCards";
     eyebrow?: string;
-    title: string;
+    title?: string;
     richText: Array<{
       children?: Array<{
         marks?: Array<string>;
@@ -1458,8 +1496,8 @@ export type QuerySlugPageDataResult = {
       href: string | null;
     }> | null;
     cards: Array<{
-      title: string;
-      description: string;
+      title?: string;
+      description?: string;
       image: {
         id: string | null;
         preview: string | null;
@@ -1553,7 +1591,7 @@ export type QuerySlugPageDataResult = {
 } | null;
 // Variable: querySlugPagePaths
 // Query: *[_type == "page" && defined(slug.current)].slug.current
-export type QuerySlugPagePathsResult = Array<string>;
+export type QuerySlugPagePathsResult = Array<string | null>;
 // Variable: queryBlogIndexPageData
 // Query: *[_type == "blogIndex"][0]{    ...,    _id,    _type,    title,    description,    "displayFeaturedBlogs" : displayFeaturedBlogs == "yes",    "featuredBlogsCount" : featuredBlogsCount,      pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    _type == "image" => {        "id": asset._ref,  "preview": asset->metadata.lqip,  hotspot {    x,    y  },  crop {    bottom,    left,    right,    top  },      "caption": caption    }  },      buttons[]{    text,    variant,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "hero" => {    ...,      image {      "id": asset._ref,  "preview": asset->metadata.lqip,  hotspot {    x,    y  },  crop {    bottom,    left,    right,    top  }  },      buttons[]{    text,    variant,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    _type == "image" => {        "id": asset._ref,  "preview": asset->metadata.lqip,  hotspot {    x,    y  },  crop {    bottom,    left,    right,    top  },      "caption": caption    }  }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    _type == "image" => {        "id": asset._ref,  "preview": asset->metadata.lqip,  hotspot {    x,    y  },  crop {    bottom,    left,    right,    top  },      "caption": caption    }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "featureCardsIcon" => {    ...,      richText[]{    ...,    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    _type == "image" => {        "id": asset._ref,  "preview": asset->metadata.lqip,  hotspot {    x,    y  },  crop {    bottom,    left,    right,    top  },      "caption": caption    }  },    "cards": array::compact(cards[]{      ...,        richText[]{    ...,    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    _type == "image" => {        "id": asset._ref,  "preview": asset->metadata.lqip,  hotspot {    x,    y  },  crop {    bottom,    left,    right,    top  },      "caption": caption    }  },    })  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    _type == "image" => {        "id": asset._ref,  "preview": asset->metadata.lqip,  hotspot {    x,    y  },  crop {    bottom,    left,    right,    top  },      "caption": caption    }  },      buttons[]{    text,    variant,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image {      "id": asset._ref,  "preview": asset->metadata.lqip,  hotspot {    x,    y  },  crop {    bottom,    left,    right,    top  }  },    })  }  },    "slug": slug.current,    "blogs": *[_type == "blog" && (seoHideFromLists != true)] | order(orderRank asc){        _type,  _id,  title,  description,  "slug":slug.current,  orderRank,    image {      "id": asset._ref,  "preview": asset->metadata.lqip,  hotspot {    x,    y  },  crop {    bottom,    left,    right,    top  }  },  publishedAt,    authors[0]->{    _id,    name,    position,      image {      "id": asset._ref,  "preview": asset->metadata.lqip,  hotspot {    x,    y  },  crop {    bottom,    left,    right,    top  }  }  }    }  }
 export type QueryBlogIndexPageDataResult = {
@@ -1564,7 +1602,7 @@ export type QueryBlogIndexPageDataResult = {
   _rev: string;
   title: string | null;
   description: string | null;
-  slug: string;
+  slug: string | null;
   displayFeaturedBlogs: false | true;
   featuredBlogsCount: "1" | "2" | "3" | null;
   pageBuilder: Array<{
@@ -1608,7 +1646,7 @@ export type QueryBlogIndexPageDataResult = {
     _key: string;
     _type: "faqAccordion";
     eyebrow?: string;
-    title: string;
+    title?: string;
     subtitle?: string;
     link: {
       title?: string;
@@ -1618,7 +1656,7 @@ export type QueryBlogIndexPageDataResult = {
       href: string | null;
     } | null;
     faqs: Array<{
-      title: string;
+      title: string | null;
       _id: string;
       _type: "faq";
       richText: Array<{
@@ -1645,7 +1683,7 @@ export type QueryBlogIndexPageDataResult = {
         _type: "block";
         _key: string;
       }> | null;
-    }>;
+    }> | null;
   } | {
     _key: string;
     _type: "featureCardsIcon";
@@ -1760,7 +1798,7 @@ export type QueryBlogIndexPageDataResult = {
     _key: string;
     _type: "imageLinkCards";
     eyebrow?: string;
-    title: string;
+    title?: string;
     richText: Array<{
       children?: Array<{
         marks?: Array<string>;
@@ -1794,8 +1832,8 @@ export type QueryBlogIndexPageDataResult = {
       href: string | null;
     }> | null;
     cards: Array<{
-      title: string;
-      description: string;
+      title?: string;
+      description?: string;
       image: {
         id: string | null;
         preview: string | null;
@@ -1888,9 +1926,9 @@ export type QueryBlogIndexPageDataResult = {
   blogs: Array<{
     _type: "blog";
     _id: string;
-    title: string;
+    title: string | null;
     description: string | null;
-    slug: string;
+    slug: string | null;
     orderRank: string | null;
     image: {
       id: string | null;
@@ -1905,11 +1943,11 @@ export type QueryBlogIndexPageDataResult = {
         right: number | null;
         top: number | null;
       } | null;
-    };
+    } | null;
     publishedAt: string | null;
     authors: {
       _id: string;
-      name: string;
+      name: string | null;
       position: string | null;
       image: {
         id: string | null;
@@ -1937,12 +1975,12 @@ export type QueryBlogSlugPageDataResult = {
   _updatedAt: string;
   _rev: string;
   orderRank?: string;
-  title: string;
+  title?: string;
   description?: string;
-  slug: string;
+  slug: string | null;
   authors: {
     _id: string;
-    name: string;
+    name: string | null;
     position: string | null;
     image: {
       id: string | null;
@@ -1973,7 +2011,7 @@ export type QueryBlogSlugPageDataResult = {
       right: number | null;
       top: number | null;
     } | null;
-  };
+  } | null;
   richText: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -2043,7 +2081,7 @@ export type QueryBlogSlugPageDataResult = {
 } | null;
 // Variable: queryBlogPaths
 // Query: *[_type == "blog" && defined(slug.current)].slug.current
-export type QueryBlogPathsResult = Array<string>;
+export type QueryBlogPathsResult = Array<string | null>;
 // Variable: queryHomePageOGData
 // Query: *[_type == "homePage" && _id == $id][0]{      _id,  _type,  "title": select(    defined(ogTitle) => ogTitle,    defined(seoTitle) => seoTitle,    title  ),  "description": select(    defined(ogDescription) => ogDescription,    defined(seoDescription) => seoDescription,    description  ),  "image": image.asset->url + "?w=566&h=566&dpr=2&fit=max",  "dominantColor": image.asset->metadata.palette.dominant.background,  "seoImage": seoImage.asset->url + "?w=1200&h=630&dpr=2&fit=max",   "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max&q=100",  "date": coalesce(date, _createdAt)  }
 export type QueryHomePageOGDataResult = {
@@ -2126,6 +2164,45 @@ export type QueryGenericPageOGDataResult = {
   logo: string | null;
   date: string;
 } | null;
+// Variable: queryJambFooterData
+// Query: *[_type == "jambFooter" && _id == "jambFooter"][0]{    _id,    _type,    _createdAt,    _updatedAt,    contactInfo {      _type,      phone,      addressLine1,      addressLine2,      email    },    newsletter {      _type,      title,      inputPlaceholder,      buttonText,      privacyText,      "privacyPolicyLink": select(        defined(privacyPolicyLink.url.type) => select(          privacyPolicyLink.url.type == "internal" => privacyPolicyLink.url.internal->slug.current,          privacyPolicyLink.url.type == "external" => privacyPolicyLink.url.external,          ""        ),        ""      )    },    columns[]{      _key,      _type,      sections[]{        _key,        _type,        title,        isStandalone,        links[]{          _key,          _type,          label,          "href": select(            url.type == "internal" => url.internal->slug.current,            url.type == "external" => url.external,            url.href          )        }      }    }  }
+export type QueryJambFooterDataResult = {
+  _id: string;
+  _type: "jambFooter";
+  _createdAt: string;
+  _updatedAt: string;
+  contactInfo: {
+    _type: null;
+    phone: string | null;
+    addressLine1: string | null;
+    addressLine2: string | null;
+    email: string | null;
+  } | null;
+  newsletter: {
+    _type: null;
+    title: string | null;
+    inputPlaceholder: string | null;
+    buttonText: string | null;
+    privacyText: string | null;
+    privacyPolicyLink: "";
+  } | null;
+  columns: Array<{
+    _key: string;
+    _type: "footerColumn";
+    sections: Array<{
+      _key: string;
+      _type: "footerSection";
+      title: string | null;
+      isStandalone: boolean | null;
+      links: Array<{
+        _key: string;
+        _type: "footerLink";
+        label: string | null;
+        href: string | null;
+      }> | null;
+    }> | null;
+  }> | null;
+} | null;
 // Variable: queryFooterData
 // Query: *[_type == "footer" && _id == "footer"][0]{    _id,    subtitle,    columns[]{      _key,      title,      links[]{        _key,        name,        "openInNewTab": url.openInNewTab,        "href": select(          url.type == "internal" => url.internal->slug.current,          url.type == "external" => url.external,          url.href        ),      }    }  }
 export type QueryFooterDataResult = {
@@ -2164,7 +2241,7 @@ export type QueryNavbarDataResult = {
       description: string | null;
       openInNewTab: boolean | null;
       href: string | null;
-    }>;
+    }> | null;
   }> | null;
   buttons: Array<{
     text: string | null;
@@ -2179,11 +2256,11 @@ export type QueryNavbarDataResult = {
 // Query: {  "slugPages": *[_type == "page" && defined(slug.current)]{    "slug": slug.current,    "lastModified": _updatedAt  },  "blogPages": *[_type == "blog" && defined(slug.current)]{    "slug": slug.current,    "lastModified": _updatedAt  }}
 export type QuerySitemapDataResult = {
   slugPages: Array<{
-    slug: string;
+    slug: string | null;
     lastModified: string;
   }>;
   blogPages: Array<{
-    slug: string;
+    slug: string | null;
     lastModified: string;
   }>;
 };
@@ -2192,7 +2269,7 @@ export type QuerySitemapDataResult = {
 export type QueryGlobalSeoSettingsResult = {
   _id: string;
   _type: "settings";
-  siteTitle: string;
+  siteTitle: string | null;
   logo: {
     id: string | null;
     preview: string | null;
@@ -2207,7 +2284,7 @@ export type QueryGlobalSeoSettingsResult = {
       top: number | null;
     } | null;
   } | null;
-  siteDescription: string;
+  siteDescription: string | null;
   socialLinks: {
     linkedin: string | null;
     facebook: string | null;
@@ -2221,8 +2298,8 @@ export type QueryGlobalSeoSettingsResult = {
 export type QuerySettingsDataResult = {
   _id: string;
   _type: "settings";
-  siteTitle: string;
-  siteDescription: string;
+  siteTitle: string | null;
+  siteDescription: string | null;
   logo: string | null;
   socialLinks: {
     linkedin?: string;
@@ -2236,8 +2313,8 @@ export type QuerySettingsDataResult = {
 // Variable: queryRedirects
 // Query: *[_type == "redirect" && status == "active" && defined(source.current) && defined(destination.current)]{    "source":source.current,     "destination":destination.current,     "permanent" : permanent == "true"  }
 export type QueryRedirectsResult = Array<{
-  source: string;
-  destination: string;
+  source: string | null;
+  destination: string | null;
   permanent: false | true;
 }>;
 
@@ -2256,6 +2333,7 @@ declare module "@sanity/client" {
     "\n  *[_type == \"page\" && _id == $id][0]{\n    \n  _id,\n  _type,\n  \"title\": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  \"description\": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  \"image\": image.asset->url + \"?w=566&h=566&dpr=2&fit=max\",\n  \"dominantColor\": image.asset->metadata.palette.dominant.background,\n  \"seoImage\": seoImage.asset->url + \"?w=1200&h=630&dpr=2&fit=max\", \n  \"logo\": *[_type == \"settings\"][0].logo.asset->url + \"?w=80&h=40&dpr=3&fit=max&q=100\",\n  \"date\": coalesce(date, _createdAt)\n\n  }\n": QuerySlugPageOGDataResult;
     "\n  *[_type == \"blog\" && _id == $id][0]{\n    \n  _id,\n  _type,\n  \"title\": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  \"description\": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  \"image\": image.asset->url + \"?w=566&h=566&dpr=2&fit=max\",\n  \"dominantColor\": image.asset->metadata.palette.dominant.background,\n  \"seoImage\": seoImage.asset->url + \"?w=1200&h=630&dpr=2&fit=max\", \n  \"logo\": *[_type == \"settings\"][0].logo.asset->url + \"?w=80&h=40&dpr=3&fit=max&q=100\",\n  \"date\": coalesce(date, _createdAt)\n\n  }\n": QueryBlogPageOGDataResult;
     "\n  *[ defined(slug.current) && _id == $id][0]{\n    \n  _id,\n  _type,\n  \"title\": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  \"description\": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  \"image\": image.asset->url + \"?w=566&h=566&dpr=2&fit=max\",\n  \"dominantColor\": image.asset->metadata.palette.dominant.background,\n  \"seoImage\": seoImage.asset->url + \"?w=1200&h=630&dpr=2&fit=max\", \n  \"logo\": *[_type == \"settings\"][0].logo.asset->url + \"?w=80&h=40&dpr=3&fit=max&q=100\",\n  \"date\": coalesce(date, _createdAt)\n\n  }\n": QueryGenericPageOGDataResult;
+    "\n  *[_type == \"jambFooter\" && _id == \"jambFooter\"][0]{\n    _id,\n    _type,\n    _createdAt,\n    _updatedAt,\n    contactInfo {\n      _type,\n      phone,\n      addressLine1,\n      addressLine2,\n      email\n    },\n    newsletter {\n      _type,\n      title,\n      inputPlaceholder,\n      buttonText,\n      privacyText,\n      \"privacyPolicyLink\": select(\n        defined(privacyPolicyLink.url.type) => select(\n          privacyPolicyLink.url.type == \"internal\" => privacyPolicyLink.url.internal->slug.current,\n          privacyPolicyLink.url.type == \"external\" => privacyPolicyLink.url.external,\n          \"\"\n        ),\n        \"\"\n      )\n    },\n    columns[]{\n      _key,\n      _type,\n      sections[]{\n        _key,\n        _type,\n        title,\n        isStandalone,\n        links[]{\n          _key,\n          _type,\n          label,\n          \"href\": select(\n            url.type == \"internal\" => url.internal->slug.current,\n            url.type == \"external\" => url.external,\n            url.href\n          )\n        }\n      }\n    }\n  }\n": QueryJambFooterDataResult;
     "\n  *[_type == \"footer\" && _id == \"footer\"][0]{\n    _id,\n    subtitle,\n    columns[]{\n      _key,\n      title,\n      links[]{\n        _key,\n        name,\n        \"openInNewTab\": url.openInNewTab,\n        \"href\": select(\n          url.type == \"internal\" => url.internal->slug.current,\n          url.type == \"external\" => url.external,\n          url.href\n        ),\n      }\n    }\n  }\n": QueryFooterDataResult;
     "\n  *[_type == \"navbar\" && _id == \"navbar\"][0]{\n    _id,\n    columns[]{\n      _key,\n      _type == \"navbarColumn\" => {\n        \"type\": \"column\",\n        title,\n        links[]{\n          _key,\n          name,\n          icon,\n          description,\n          \"openInNewTab\": url.openInNewTab,\n          \"href\": select(\n            url.type == \"internal\" => url.internal->slug.current,\n            url.type == \"external\" => url.external,\n            url.href\n          )\n        }\n      },\n      _type == \"navbarLink\" => {\n        \"type\": \"link\",\n        name,\n        description,\n        \"openInNewTab\": url.openInNewTab,\n        \"href\": select(\n          url.type == \"internal\" => url.internal->slug.current,\n          url.type == \"external\" => url.external,\n          url.href\n        )\n      }\n    },\n    \n  buttons[]{\n    text,\n    variant,\n    _key,\n    _type,\n    \"openInNewTab\": url.openInNewTab,\n    \"href\": select(\n      url.type == \"internal\" => url.internal->slug.current,\n      url.type == \"external\" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n": QueryNavbarDataResult;
     "{\n  \"slugPages\": *[_type == \"page\" && defined(slug.current)]{\n    \"slug\": slug.current,\n    \"lastModified\": _updatedAt\n  },\n  \"blogPages\": *[_type == \"blog\" && defined(slug.current)]{\n    \"slug\": slug.current,\n    \"lastModified\": _updatedAt\n  }\n}": QuerySitemapDataResult;
