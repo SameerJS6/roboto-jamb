@@ -41,7 +41,9 @@ const BLOCK_COMPONENTS = {
     PagebuilderType<"faqAccordion">
   >,
   hero: HeroBlock as React.ComponentType<PagebuilderType<"hero">>,
-  jambHero: JambHero as React.ComponentType<PagebuilderType<"jambHero"> & { allBlocks: PageBuilderBlock[] }>,
+  jambHero: JambHero as React.ComponentType<
+    PagebuilderType<"jambHero"> & { allBlocks: PageBuilderBlock[] }
+  >,
   featureCardsIcon: FeatureCardsWithIcon as React.ComponentType<
     PagebuilderType<"featureCardsIcon">
   >,
@@ -121,7 +123,11 @@ function useOptimisticPageBuilder(
 /**
  * Custom hook for block component rendering logic
  */
-function useBlockRenderer(id: string, type: string, blocks: PageBuilderBlock[]) {
+function useBlockRenderer(
+  id: string,
+  type: string,
+  blocks: PageBuilderBlock[]
+) {
   const createBlockDataAttribute = useCallback(
     (blockKey: string) =>
       createSanityDataAttribute({
@@ -197,7 +203,7 @@ export function PageBuilder({
   return (
     <section
       aria-label="Page content"
-      className="mx-auto my-16 flex flex-col gap-16"
+      className="mx-auto flex flex-col gap-16"
       data-sanity={containerDataAttribute}
     >
       {blocks.map(renderBlock)}
