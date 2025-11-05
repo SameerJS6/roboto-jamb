@@ -156,6 +156,12 @@ export const structure = (
                 title: "Global Settings",
                 icon: CogIcon,
               }),
+              createSingleTon({
+                S,
+                type: "jambFooter",
+                title: "New Footer",
+                icon: FileText,
+              })
             ])
         ),
     ]);
