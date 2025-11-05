@@ -7,6 +7,7 @@ import { useCallback, useMemo } from "react";
 import { dataset, projectId, studioUrl } from "@/config";
 import type { QueryHomePageDataResult } from "@/lib/sanity/sanity.types";
 import type { PageBuilderBlockTypes, PagebuilderType } from "@/types";
+import JambImageGrid from "./jamb-image-grid";
 import { MainColumnLayoutComponent } from "./main-column";
 import { CTABlock } from "./sections/cta";
 import { FaqAccordion } from "./sections/faq-accordion";
@@ -47,6 +48,9 @@ const BLOCK_COMPONENTS = {
   >,
   imageLinkCards: ImageLinkCards as React.ComponentType<
     PagebuilderType<"imageLinkCards">
+  >,
+  jambImageGrid: JambImageGrid as React.ComponentType<
+    PagebuilderType<"jambImageGrid">
   >,
   mainColumn: MainColumnLayoutComponent as React.ComponentType<
     PagebuilderType<"mainColumn">
