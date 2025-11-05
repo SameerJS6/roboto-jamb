@@ -83,7 +83,10 @@ export function JambFooter({
             <div className="flex gap-2">
               <Input
                 className="bg-background"
-                placeholder={footerData?.newsletter?.inputPlaceholder ?? "Enter your email address"}
+                placeholder={
+                  footerData?.newsletter?.inputPlaceholder ??
+                  "Enter your email address"
+                }
                 type="email"
               />
               <Button
@@ -109,9 +112,7 @@ export function JambFooter({
           </div>
         </div>
 
-        <div
-          className="grid gap-8 pt-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
-        >
+        <div className="grid gap-8 pt-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {footerData?.columns?.map((column) => (
             <div key={column._key}>
               {column?.sections?.map((section, sectionIndex) => (
@@ -129,7 +130,7 @@ export function JambFooter({
                         {section.links.map((link) => (
                           <li key={link._key}>
                             <Link
-                              className="relative inline-block break-words text-muted-foreground text-sm transition-colors after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:origin-left after:bg-foreground after:transition-all after:duration-300 hover:text-foreground hover:after:w-full"
+                              className="link-effect relative inline-block break-words text-muted-foreground text-sm transition-colors after:bottom-0 hover:after:origin-left hover:after:scale-x-100"
                               href={link?.href ?? ""}
                             >
                               {link.label}
