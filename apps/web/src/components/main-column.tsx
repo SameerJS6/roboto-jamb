@@ -3,6 +3,7 @@
 import { cn } from "@workspace/ui/lib/utils";
 import { stegaClean } from "next-sanity";
 import type { PagebuilderType } from "@/types";
+import { convertToSlug } from "@/utils";
 import { SanityButtons } from "./elements/sanity-buttons";
 import { SanityImage } from "./elements/sanity-image";
 
@@ -36,6 +37,20 @@ function MainColumnImage({
   );
 }
 
+function getSlugSource(
+  navigationSlugField: InferredMainColumnLayoutProps["navigationSlugField"],
+  headline: InferredMainColumnLayoutProps["headline"],
+  title: InferredMainColumnLayoutProps["title"]
+): string {
+  const cleanNavigationSlugField = stegaClean(navigationSlugField);
+  const cleanHeadline = stegaClean(headline);
+  const cleanTitle = stegaClean(title);
+
+  return cleanNavigationSlugField === "headline"
+    ? (cleanHeadline ?? "")
+    : cleanTitle;
+}
+
 export function MainColumnLayoutComponent({
   headline,
   title,
@@ -48,10 +63,12 @@ export function MainColumnLayoutComponent({
   mobileLayoutDirection = "column",
   buttons,
   ctaLayout = "row",
+  navigationSlugField,
 }: InferredMainColumnLayoutProps) {
   const cleanBackgroundColor = stegaClean(backgroundColor);
   const cleanDesktopLayoutDirection = stegaClean(desktopLayoutDirection);
   const cleanMobileLayoutDirection = stegaClean(mobileLayoutDirection);
+
   const cleanCTALayout = stegaClean(ctaLayout);
   const cleanImageFill = stegaClean(imageFill);
 
@@ -60,9 +77,16 @@ export function MainColumnLayoutComponent({
       ? stegaClean(customBackgroundColor)
       : cleanBackgroundColor;
 
+  const slugSource = getSlugSource(
+    navigationSlugField ?? "title",
+    headline,
+    title
+  );
+
   return (
     <section
       className="py-9"
+      {...(slugSource && { id: convertToSlug(slugSource) })}
       style={{ backgroundColor: actualBackgroundColor }}
     >
       <div
