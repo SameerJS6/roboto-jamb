@@ -3,10 +3,15 @@ import { defineField, defineType } from "sanity";
 import { createRadioListLayout } from "../../utils/helper";
 import { buttonsField } from "../common";
 
-const desktopLayoutOptions = ["row", "row-reverse"] ;
-const mobileLayoutOptions = ["column", "column-reverse"] ;
+const desktopLayoutOptions = ["row", "row-reverse"];
+const mobileLayoutOptions = ["column", "column-reverse"];
 const imageFillOptions = ["contain", "cover"];
 const ctaLayoutOptions = ["column", "row"];
+const backgroundColorOptions = [
+  { title: "Transparent", value: "transparent" },
+  { title: "Muted", value: "#DFDAD7" },
+  { title: "Custom Color", value: "custom" },
+];
 
 export const mainColumn = defineType({
   name: "mainColumn",
@@ -47,14 +52,9 @@ export const mainColumn = defineType({
       description:
         "Choose a predefined background color or select 'Custom Color' to use your own. This affects the overall background of the main column section.",
       initialValue: "#DFDAD7",
-      options: {
-        list: [
-          { title: "Transparent", value: "transparent" },
-          { title: "Muted", value: "#DFDAD7" },
-          { title: "Custom Color", value: "custom" },
-        ],
-        layout: "radio",
-      },
+      options: createRadioListLayout(backgroundColorOptions, {
+        direction: "horizontal",
+      }),
       validation: (rule) => rule.required(),
     }),
     defineField({
