@@ -75,3 +75,14 @@ export function parseChildrenToSlug(children: PortableTextBlock["children"]) {
   }
   return convertToSlug(children.map((child) => child.text).join(""));
 }
+
+// Helper function to clean string values from Sanity radio fields
+export function cleanStringValue<T extends string>(
+  value: T | undefined,
+  defaultValue: T
+): T {
+  if (!value) {
+    return defaultValue;
+  }
+  return value.trim().replace(/[\u200B-\u200D\uFEFF]/g, "") as T || defaultValue;
+};
