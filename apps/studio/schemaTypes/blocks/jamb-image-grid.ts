@@ -4,7 +4,7 @@ import { createRadioListLayout } from "../../utils/helper";
 
 const imageFillOptions = ["contain", "cover"];
 const MAX_DESCRIPTION_LENGHT = 500;
-const DEFAULT_DESCRIPTION_LENGTH = 50;
+const DEFAULT_DESCRIPTION_LENGTH = 55;
 const MINIMUM_DESCRIPTION_LENGTH = 10;
 
 const backgroundColorOptions = [
