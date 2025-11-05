@@ -1,8 +1,8 @@
 "use client";
 
 import { cn } from "@workspace/ui/lib/utils";
+import { stegaClean } from "next-sanity";
 import type { PagebuilderType } from "@/types";
-import { cleanStringValue } from "@/utils";
 import { SanityButtons } from "./elements/sanity-buttons";
 import { SanityImage } from "./elements/sanity-image";
 
@@ -49,21 +49,15 @@ export function MainColumnLayoutComponent({
   buttons,
   ctaLayout = "row",
 }: InferredMainColumnLayoutProps) {
-  const cleanBackgroundColor = cleanStringValue(backgroundColor, "#DFDAD7");
-  const cleanDesktopLayoutDirection = cleanStringValue(
-    desktopLayoutDirection,
-    "row"
-  );
-  const cleanMobileLayoutDirection = cleanStringValue(
-    mobileLayoutDirection,
-    "column"
-  );
-  const cleanCTALayout = cleanStringValue(ctaLayout, "row");
-  const cleanImageFill = cleanStringValue(imageFill, "cover");
+  const cleanBackgroundColor = stegaClean(backgroundColor);
+  const cleanDesktopLayoutDirection = stegaClean(desktopLayoutDirection);
+  const cleanMobileLayoutDirection = stegaClean(mobileLayoutDirection);
+  const cleanCTALayout = stegaClean(ctaLayout);
+  const cleanImageFill = stegaClean(imageFill);
 
   const actualBackgroundColor =
     cleanBackgroundColor === "custom" && customBackgroundColor
-      ? cleanStringValue(customBackgroundColor, "#DFDAD7")
+      ? stegaClean(customBackgroundColor)
       : cleanBackgroundColor;
 
   return (
