@@ -7,6 +7,7 @@ import { useCallback, useMemo } from "react";
 import { dataset, projectId, studioUrl } from "@/config";
 import type { QueryHomePageDataResult } from "@/lib/sanity/sanity.types";
 import type { PageBuilderBlockTypes, PagebuilderType } from "@/types";
+import { JambHero } from "./jamb-hero";
 import JambImageGrid from "./jamb-image-grid";
 import { MainColumnLayoutComponent } from "./main-column";
 import { CTABlock } from "./sections/cta";
@@ -40,6 +41,7 @@ const BLOCK_COMPONENTS = {
     PagebuilderType<"faqAccordion">
   >,
   hero: HeroBlock as React.ComponentType<PagebuilderType<"hero">>,
+  jambHero: JambHero as React.ComponentType<PagebuilderType<"jambHero"> & { allBlocks: PageBuilderBlock[] }>,
   featureCardsIcon: FeatureCardsWithIcon as React.ComponentType<
     PagebuilderType<"featureCardsIcon">
   >,
@@ -119,7 +121,7 @@ function useOptimisticPageBuilder(
 /**
  * Custom hook for block component rendering logic
  */
-function useBlockRenderer(id: string, type: string) {
+function useBlockRenderer(id: string, type: string, blocks: PageBuilderBlock[]) {
   const createBlockDataAttribute = useCallback(
     (blockKey: string) =>
       createSanityDataAttribute({
@@ -145,6 +147,18 @@ function useBlockRenderer(id: string, type: string) {
         );
       }
 
+      // Special handling for jambHero to pass allBlocks prop
+      if (block._type === "jambHero") {
+        return (
+          <div
+            data-sanity={createBlockDataAttribute(block._key)}
+            key={`${block._type}-${block._key}`}
+          >
+            <Component {...(block as any)} allBlocks={blocks} />
+          </div>
+        );
+      }
+
       return (
         <div
           data-sanity={createBlockDataAttribute(block._key)}
@@ -154,7 +168,7 @@ function useBlockRenderer(id: string, type: string) {
         </div>
       );
     },
-    [createBlockDataAttribute]
+    [createBlockDataAttribute, blocks]
   );
 
   return { renderBlock };
@@ -169,7 +183,7 @@ export function PageBuilder({
   type,
 }: PageBuilderProps) {
   const blocks = useOptimisticPageBuilder(initialBlocks, id);
-  const { renderBlock } = useBlockRenderer(id, type);
+  const { renderBlock } = useBlockRenderer(id, type, blocks);
 
   const containerDataAttribute = useMemo(
     () => createSanityDataAttribute({ id, type, path: "pageBuilder" }),
