@@ -3,14 +3,13 @@
 import { useOptimistic } from "@sanity/visual-editing/react";
 import { createDataAttribute } from "next-sanity";
 import { useCallback, useMemo } from "react";
-import { JambHero } from "@/components/jamb-hero";
-import JambImageGrid from "@/components/jamb-image-grid";
-import { MainColumnLayoutComponent } from "@/components/main-column";
+import Hero from "@/components/sections/hero";
+import ImageGrid from "@/components/sections/image-grid";
+import SplitFeatureSection from "@/components/sections/split-feature-section";
 import { dataset, projectId, studioUrl } from "@/config";
 import type { QueryHomePageDataResult } from "@/lib/sanity/sanity.types";
 import type { PageBuilderBlockTypes, PagebuilderType } from "@/types";
 
-// More specific and descriptive type aliases
 export type PageBuilderBlock = NonNullable<
   NonNullable<QueryHomePageDataResult>["pageBuilder"]
 >[number];
@@ -27,16 +26,13 @@ type SanityDataAttributeConfig = {
   readonly path: string;
 };
 
-// Strongly typed component mapping with proper component signatures
 const BLOCK_COMPONENTS = {
-  jambHero: JambHero as React.ComponentType<
-    PagebuilderType<"jambHero"> & { allBlocks: PageBuilderBlock[] }
+  hero: Hero as React.ComponentType<
+    PagebuilderType<"hero"> & { allBlocks: PageBuilderBlock[] }
   >,
-  jambImageGrid: JambImageGrid as React.ComponentType<
-    PagebuilderType<"jambImageGrid">
-  >,
-  mainColumn: MainColumnLayoutComponent as React.ComponentType<
-    PagebuilderType<"mainColumn">
+  imageGrid: ImageGrid as React.ComponentType<PagebuilderType<"imageGrid">>,
+  splitFeatureSection: SplitFeatureSection as React.ComponentType<
+    PagebuilderType<"splitFeatureSection">
   >,
 } as const satisfies Record<PageBuilderBlockTypes, React.ComponentType<any>>;
 
@@ -133,7 +129,7 @@ function useBlockRenderer(
       }
 
       // Special handling for jambHero to pass allBlocks prop
-      if (block._type === "jambHero") {
+      if (block._type === "hero") {
         return (
           <div
             data-sanity={createBlockDataAttribute(block._key)}
