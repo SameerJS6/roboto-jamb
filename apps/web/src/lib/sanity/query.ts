@@ -184,6 +184,10 @@ const mainColumnBlock = /* groq */ `
     },
     desktopLayoutDirection,
     mobileLayoutDirection,
+    allowNavigation,
+    navigationSlugField,
+    title,
+    headline,
     ${buttonsFragment},
   }
 `;
@@ -195,6 +199,7 @@ const jambImageGridBlock = /* groq */ `
     customBackgroundColor,
     imageFill,
     title,
+    allowNavigation,
     maxDescriptionLength,
     "features": array::compact(features[]{
       ...,
@@ -206,12 +211,20 @@ const jambImageGridBlock = /* groq */ `
   }
 `;
 
+const jambHeroBlock = /* groq */ `
+  _type == "jambHero" => {
+    ...,
+    ${imageFragment},
+  }
+`;
+
 const pageBuilderFragment = /* groq */ `
   pageBuilder[]{
     ...,
     _type,
     ${ctaBlock},
     ${heroBlock},
+    ${jambHeroBlock},
     ${faqAccordionBlock},
     ${featureCardsIconBlock},
     ${subscribeNewsletterBlock},
