@@ -88,6 +88,8 @@
   }
 
   html {
+    @apply scroll-smooth;
+
     scrollbar-width: thin;
     scrollbar-color: var(--foreground) var(--background);
   }
