@@ -10,12 +10,6 @@ import type { PageBuilderBlockTypes, PagebuilderType } from "@/types";
 import { JambHero } from "./jamb-hero";
 import JambImageGrid from "./jamb-image-grid";
 import { MainColumnLayoutComponent } from "./main-column";
-import { CTABlock } from "./sections/cta";
-import { FaqAccordion } from "./sections/faq-accordion";
-import { FeatureCardsWithIcon } from "./sections/feature-cards-with-icon";
-import { HeroBlock } from "./sections/hero";
-import { ImageLinkCards } from "./sections/image-link-cards";
-import { SubscribeNewsletter } from "./sections/subscribe-newsletter";
 
 // More specific and descriptive type aliases
 export type PageBuilderBlock = NonNullable<
@@ -36,22 +30,8 @@ type SanityDataAttributeConfig = {
 
 // Strongly typed component mapping with proper component signatures
 const BLOCK_COMPONENTS = {
-  cta: CTABlock as React.ComponentType<PagebuilderType<"cta">>,
-  faqAccordion: FaqAccordion as React.ComponentType<
-    PagebuilderType<"faqAccordion">
-  >,
-  hero: HeroBlock as React.ComponentType<PagebuilderType<"hero">>,
   jambHero: JambHero as React.ComponentType<
     PagebuilderType<"jambHero"> & { allBlocks: PageBuilderBlock[] }
-  >,
-  featureCardsIcon: FeatureCardsWithIcon as React.ComponentType<
-    PagebuilderType<"featureCardsIcon">
-  >,
-  subscribeNewsletter: SubscribeNewsletter as React.ComponentType<
-    PagebuilderType<"subscribeNewsletter">
-  >,
-  imageLinkCards: ImageLinkCards as React.ComponentType<
-    PagebuilderType<"imageLinkCards">
   >,
   jambImageGrid: JambImageGrid as React.ComponentType<
     PagebuilderType<"jambImageGrid">

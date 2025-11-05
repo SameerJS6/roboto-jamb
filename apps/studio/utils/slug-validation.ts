@@ -64,11 +64,9 @@ export const SLUG_ERROR_MESSAGES = {
 // Constants for validation
 const MIN_SLUG_LENGTH = 3;
 const MAX_SLUG_LENGTH = 60;
-const MIN_BLOG_SLUG_LENGTH = 3;
 const VALID_SLUG_REGEX = /^[a-z0-9-]+$/;
 const INVALID_CHAR_REGEX = /[^a-z0-9-]/;
 const CLEAN_INVALID_CHARS_REGEX = /[^a-z0-9-]/g;
-const FORBIDDEN_BLOG_PATTERN = /^\/blog\/.+/;
 const FORBIDDEN_ADMIN_PATTERN = /^\/admin/;
 const FORBIDDEN_API_PATTERN = /^\/api/;
 
@@ -80,58 +78,6 @@ export const SLUG_WARNING_MESSAGES = {
 
 // Document type validation rules - Single source of truth
 const DOCUMENT_TYPE_CONFIGS: Record<string, SlugValidationOptions> = {
-  author: {
-    documentType: "Author",
-    requiredPrefix: "/author/",
-    requireSlash: true,
-    segmentCount: 2,
-    sanityDocumentType: "author",
-    forbiddenPatterns: [/^\/blog/],
-    customValidators: [
-      (slug: string) => {
-        if (slug.includes("/admin")) {
-          return ["Author URLs cannot contain '/admin' path"];
-        }
-        return [];
-      },
-    ],
-  },
-  blog: {
-    documentType: "Blog post",
-    requiredPrefix: "/blog/",
-    requireSlash: true,
-    segmentCount: 2,
-    sanityDocumentType: "blog",
-    forbiddenPatterns: [/^\/author/, /^\/admin/],
-    customValidators: [
-      (slug: string) => {
-        const segments = slug.split("/").filter(Boolean);
-        if (
-          segments.length === 2 &&
-          segments[1].length < MIN_BLOG_SLUG_LENGTH
-        ) {
-          return ["Blog post slug must be at least 3 characters"];
-        }
-        return [];
-      },
-    ],
-  },
-  blogIndex: {
-    documentType: "Blog index",
-    requiredPrefix: "/blog",
-    requireSlash: true,
-    segmentCount: 1,
-    sanityDocumentType: "blogIndex",
-    forbiddenPatterns: [FORBIDDEN_BLOG_PATTERN],
-    customValidators: [
-      (slug: string) => {
-        if (slug !== "/blog") {
-          return ["Blog index must be exactly '/blog'"];
-        }
-        return [];
-      },
-    ],
-  },
   homePage: {
     documentType: "Home page",
     sanityDocumentType: "homePage",
@@ -152,24 +98,12 @@ const DOCUMENT_TYPE_CONFIGS: Record<string, SlugValidationOptions> = {
     requireSlash: true,
     sanityDocumentType: "page",
     forbiddenPatterns: [
-      /^\/blog/,
-      /^\/author/,
       FORBIDDEN_ADMIN_PATTERN,
       FORBIDDEN_API_PATTERN,
     ],
     customValidators: [
       (slug: string) => {
         const errors: string[] = [];
-        if (slug.startsWith("/blog")) {
-          errors.push(
-            'Pages cannot use "/blog" prefix - reserved for blog content'
-          );
-        }
-        if (slug.startsWith("/author")) {
-          errors.push(
-            'Pages cannot use "/author" prefix - reserved for authors'
-          );
-        }
         if (slug.startsWith("/admin")) {
           errors.push('Pages cannot use "/admin" prefix - reserved for admin');
         }
@@ -526,15 +460,6 @@ export function generateSlugFromTitle(
   switch (documentType) {
     case "homePage":
       return "/";
-
-    case "blogIndex":
-      return "/blog";
-
-    case "author":
-      return `/author/${cleanTitle}`;
-
-    case "blog":
-      return `/blog/${cleanTitle}`;
 
     case "page":
       // For pages, preserve existing path structure if it exists

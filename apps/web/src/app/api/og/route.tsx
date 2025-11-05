@@ -6,7 +6,6 @@ import { getTitleCase } from "@/utils";
 
 import { getOgMetaData } from "./og-config";
 import {
-  getBlogPageOGData,
   getGenericPageOGData,
   getHomePageOGData,
   getSlugPageOGData,
@@ -227,20 +226,6 @@ const getSlugPageContent = async ({ id }: ContentProps) => {
   return dominantColorSeoImageRender(result);
 };
 
-const getBlogPageContent = async ({ id }: ContentProps) => {
-  if (!id) {
-    return;
-  }
-  const [result, err] = await getBlogPageOGData(id);
-  if (err || !result) {
-    return;
-  }
-  if (result?.seoImage) {
-    return seoImageRender({ seoImage: result.seoImage });
-  }
-  return dominantColorSeoImageRender(result);
-};
-
 const getGenericPageContent = async ({ id }: ContentProps) => {
   if (!id) {
     return;
@@ -258,7 +243,6 @@ const getGenericPageContent = async ({ id }: ContentProps) => {
 const block = {
   homePage: getHomePageContent,
   page: getSlugPageContent,
-  blog: getBlogPageContent,
 } as const;
 
 export async function GET({ url }: Request): Promise<ImageResponse> {

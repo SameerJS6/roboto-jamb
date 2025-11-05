@@ -140,10 +140,6 @@ export function createPageTemplate() {
       title: "Page",
       type: "page",
     },
-    {
-      title: "Blog",
-      type: "blog",
-    },
   ];
   return pages.map((page) => ({
     schemaType: page.type,
