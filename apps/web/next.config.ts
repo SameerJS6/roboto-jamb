@@ -20,6 +20,18 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "invalid-url-that-will-fail.com"
+      },
+      {
+        protocol: "https",
+        hostname: "another-invalid-url.com"
+      },
+      {
+        protocol: "https",
+        hostname: "placehold.co"
+      },
+      {
+        protocol: "https",
         hostname: "cdn.sanity.io",
         pathname: `/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/**`,
       },
