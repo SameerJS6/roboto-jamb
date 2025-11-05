@@ -26,15 +26,17 @@ type SanityDataAttributeConfig = {
   readonly path: string;
 };
 
+type BlockComponentsMap = {
+  hero: React.ComponentType<PagebuilderType<"hero"> & { allBlocks: PageBuilderBlock[] }>;
+} & {
+  [K in Exclude<PageBuilderBlockTypes, "hero">]: React.ComponentType<PagebuilderType<K>>
+};
+
 const BLOCK_COMPONENTS = {
-  hero: Hero as React.ComponentType<
-    PagebuilderType<"hero"> & { allBlocks: PageBuilderBlock[] }
-  >,
-  imageGrid: ImageGrid as React.ComponentType<PagebuilderType<"imageGrid">>,
-  splitFeatureSection: SplitFeatureSection as React.ComponentType<
-    PagebuilderType<"splitFeatureSection">
-  >,
-} as const satisfies Record<PageBuilderBlockTypes, React.ComponentType<any>>;
+  hero: Hero,
+  imageGrid: ImageGrid ,
+  splitFeatureSection: SplitFeatureSection,
+} as const satisfies BlockComponentsMap;
 
 /**
  * Helper function to create consistent Sanity data attributes
