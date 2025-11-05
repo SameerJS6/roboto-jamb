@@ -1,5 +1,8 @@
 import { Sparkles } from "lucide-react";
 import { defineField, defineType } from "sanity";
+import { createRadioListLayout } from "../../utils/helper";
+
+const imageFillOptions = ["contain", "cover"];
 
 export const jambHero = defineType({
   name: "jambHero",
@@ -30,6 +33,18 @@ export const jambHero = defineType({
       ],
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: "imageFill",
+      type: "string",
+      title: "Image Fill",
+      description:
+        "How the image should fill its container - 'cover' fills the entire area (may crop), 'contain' shows the entire image (may leave empty space)",
+      initialValue: "cover",
+      options: createRadioListLayout(imageFillOptions, {
+        direction: "horizontal",
+      }),
+      validation: (rule) => rule.required(),
+    })
   ],
   preview: {
     select: {
