@@ -174,6 +174,20 @@ const featureCardsIconBlock = /* groq */ `
   }
 `;
 
+const mainColumnBlock = /* groq */ `
+  _type == "mainColumn" => {
+    ...,
+    customBackgroundColor,
+    image {
+      ${imageFields},
+      alt
+    },
+    desktopLayoutDirection,
+    mobileLayoutDirection,
+    ${buttonsFragment},
+  }
+`;
+
 const pageBuilderFragment = /* groq */ `
   pageBuilder[]{
     ...,
@@ -183,7 +197,8 @@ const pageBuilderFragment = /* groq */ `
     ${faqAccordionBlock},
     ${featureCardsIconBlock},
     ${subscribeNewsletterBlock},
-    ${imageLinkCardsBlock}
+    ${imageLinkCardsBlock},
+    ${mainColumnBlock}
   }
 `;
 
@@ -268,7 +283,7 @@ const ogFieldsFragment = /* groq */ `
   ),
   "image": image.asset->url + "?w=566&h=566&dpr=2&fit=max",
   "dominantColor": image.asset->metadata.palette.dominant.background,
-  "seoImage": seoImage.asset->url + "?w=1200&h=630&dpr=2&fit=max", 
+  "seoImage": seoImage.asset->url + "?w=1200&h=630&dpr=2&fit=max",
   "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max&q=100",
   "date": coalesce(date, _createdAt)
 `;
@@ -369,6 +384,29 @@ export const queryFooterData = defineQuery(`
   }
 `);
 
+export const queryMainColumnData = defineQuery(`
+  *[_type == "mainColumn" && _id == "mainColumn"][0]{
+    _id,
+    _type,
+    _createdAt,
+    _updatedAt,
+    label,
+    headline,
+    title,
+    description,
+    backgroundColor,
+    image {
+      ${imageFields},
+      alt
+    },
+    imageFill,
+    desktopLayoutDirection,
+    mobileLayoutDirection,
+    ctaLayout,
+    ${buttonsFragment}
+  }
+`);
+
 export const queryNavbarData = defineQuery(`
   *[_type == "navbar" && _id == "navbar"][0]{
     _id,
@@ -449,8 +487,8 @@ export const querySettingsData = defineQuery(`
 
 export const queryRedirects = defineQuery(`
   *[_type == "redirect" && status == "active" && defined(source.current) && defined(destination.current)]{
-    "source":source.current, 
-    "destination":destination.current, 
+    "source":source.current,
+    "destination":destination.current,
     "permanent" : permanent == "true"
   }
 `);
