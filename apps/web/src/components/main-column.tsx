@@ -85,7 +85,7 @@ export function MainColumnLayoutComponent({
 
   return (
     <section
-      className="py-9"
+      className="scroll-my-20 py-9"
       {...(slugSource && { id: convertToSlug(slugSource) })}
       style={{ backgroundColor: actualBackgroundColor }}
     >

@@ -89,13 +89,13 @@ export default function JambImageGrid({
 
   return (
     <section
-      className="py-9"
+      className="scroll-my-20 py-9"
       {...(cleanTitle && { id: convertToSlug(cleanTitle) })}
       style={{ backgroundColor: actualBackgroundColor }}
     >
       <div className="container mx-auto space-y-12 px-4 sm:space-y-14 sm:px-6 lg:space-y-16 lg:px-8">
         {title && (
-          <h3 className="text-balance text-center font-medium text-2xl capitalize leading-[18px]">
+          <h3 className="text-balance text-center font-medium text-2xl capitalize leading-[25px]">
             {title}
           </h3>
         )}
