@@ -270,6 +270,7 @@ export type JambHero = {
     alt: string;
     _type: "image";
   };
+  imageFill?: "contain" | "cover";
 };
 
 export type Hero = {
@@ -1277,6 +1278,7 @@ export type QueryHomePageDataResult = {
         top: number;
       } | null;
     };
+    imageFill?: "contain" | "cover";
   } | {
     _key: string;
     _type: "jambImageGrid";
@@ -1705,6 +1707,7 @@ export type QuerySlugPageDataResult = {
         top: number;
       } | null;
     };
+    imageFill?: "contain" | "cover";
   } | {
     _key: string;
     _type: "jambImageGrid";
@@ -2127,6 +2130,7 @@ export type QueryBlogIndexPageDataResult = {
         top: number;
       } | null;
     };
+    imageFill?: "contain" | "cover";
   } | {
     _key: string;
     _type: "jambImageGrid";
