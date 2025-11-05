@@ -188,6 +188,24 @@ const mainColumnBlock = /* groq */ `
   }
 `;
 
+const jambImageGridBlock = /* groq */ `
+  _type == "jambImageGrid" => {
+    ...,
+    backgroundColor,
+    customBackgroundColor,
+    imageFill,
+    title,
+    maxDescriptionLength,
+    "features": array::compact(features[]{
+      ...,
+      image {
+        ${imageFields},
+        alt
+      }
+    }),
+  }
+`;
+
 const pageBuilderFragment = /* groq */ `
   pageBuilder[]{
     ...,
@@ -198,6 +216,7 @@ const pageBuilderFragment = /* groq */ `
     ${featureCardsIconBlock},
     ${subscribeNewsletterBlock},
     ${imageLinkCardsBlock},
+    ${jambImageGridBlock},
     ${mainColumnBlock}
   }
 `;
