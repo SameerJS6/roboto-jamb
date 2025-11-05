@@ -7,7 +7,7 @@ import { useCallback, useMemo } from "react";
 import { dataset, projectId, studioUrl } from "@/config";
 import type { QueryHomePageDataResult } from "@/lib/sanity/sanity.types";
 import type { PageBuilderBlockTypes, PagebuilderType } from "@/types";
-
+import { MainColumnLayoutComponent } from "./main-column";
 import { CTABlock } from "./sections/cta";
 import { FaqAccordion } from "./sections/faq-accordion";
 import { FeatureCardsWithIcon } from "./sections/feature-cards-with-icon";
@@ -25,7 +25,6 @@ export type PageBuilderProps = {
   readonly id: string;
   readonly type: string;
 };
-
 
 type SanityDataAttributeConfig = {
   readonly id: string;
@@ -48,6 +47,9 @@ const BLOCK_COMPONENTS = {
   >,
   imageLinkCards: ImageLinkCards as React.ComponentType<
     PagebuilderType<"imageLinkCards">
+  >,
+  mainColumn: MainColumnLayoutComponent as React.ComponentType<
+    PagebuilderType<"mainColumn">
   >,
 } as const satisfies Record<PageBuilderBlockTypes, React.ComponentType<any>>;
 
@@ -177,7 +179,7 @@ export function PageBuilder({
   return (
     <section
       aria-label="Page content"
-      className="mx-auto my-16 flex max-w-7xl flex-col gap-16"
+      className="mx-auto my-16 flex flex-col gap-16"
       data-sanity={containerDataAttribute}
     >
       {blocks.map(renderBlock)}
