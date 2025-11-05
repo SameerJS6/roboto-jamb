@@ -18,7 +18,7 @@ import { ImageLinkCards } from "./sections/image-link-cards";
 import { SubscribeNewsletter } from "./sections/subscribe-newsletter";
 
 // More specific and descriptive type aliases
-type PageBuilderBlock = NonNullable<
+export type PageBuilderBlock = NonNullable<
   NonNullable<QueryHomePageDataResult>["pageBuilder"]
 >[number];
 
