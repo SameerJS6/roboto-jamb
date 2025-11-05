@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { PageBuilder } from "@/components/pagebuilder";
+import { PageBuilder } from "@/components/page-builder";
 import { client } from "@/lib/sanity/client";
 import { sanityFetch } from "@/lib/sanity/live";
 import { querySlugPageData, querySlugPagePaths } from "@/lib/sanity/query";

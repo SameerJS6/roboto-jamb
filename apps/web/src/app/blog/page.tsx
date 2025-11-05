@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { BlogCard, BlogHeader, FeaturedBlogCard } from "@/components/blog-card";
-import { PageBuilder } from "@/components/pagebuilder";
+import { PageBuilder } from "@/components/page-builder";
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryBlogIndexPageData } from "@/lib/sanity/query";
 import type { QueryBlogIndexPageDataResult } from "@/lib/sanity/sanity.types";

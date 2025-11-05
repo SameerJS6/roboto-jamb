@@ -1,5 +1,5 @@
 import { stegaClean } from "next-sanity";
-import type { PageBuilderBlock } from "@/components/pagebuilder";
+import type { PageBuilderBlock } from "@/components/page-builder";
 import { convertToSlug } from "@/utils";
 
 export type NavigationLink = {
