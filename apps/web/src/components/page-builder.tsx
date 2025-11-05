@@ -3,13 +3,12 @@
 import { useOptimistic } from "@sanity/visual-editing/react";
 import { createDataAttribute } from "next-sanity";
 import { useCallback, useMemo } from "react";
-
+import { JambHero } from "@/components/jamb-hero";
+import JambImageGrid from "@/components/jamb-image-grid";
+import { MainColumnLayoutComponent } from "@/components/main-column";
 import { dataset, projectId, studioUrl } from "@/config";
 import type { QueryHomePageDataResult } from "@/lib/sanity/sanity.types";
 import type { PageBuilderBlockTypes, PagebuilderType } from "@/types";
-import { JambHero } from "./jamb-hero";
-import JambImageGrid from "./jamb-image-grid";
-import { MainColumnLayoutComponent } from "./main-column";
 
 // More specific and descriptive type aliases
 export type PageBuilderBlock = NonNullable<
