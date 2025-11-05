@@ -119,6 +119,10 @@
   svg {
     @apply rounded-full select-none block w-full h-auto object-cover max-w-full;
   }
+
+  .link-effect::after {
+    @apply absolute bottom-1.5 left-0 h-px w-full origin-right scale-x-0  bg-current transition-transform duration-300 ease-in-out content-[''];
+  }
 }
 
 @utility container {
