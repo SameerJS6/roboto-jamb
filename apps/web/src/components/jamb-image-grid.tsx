@@ -5,6 +5,7 @@ import { cn } from "@workspace/ui/lib/utils";
 import { stegaClean } from "next-sanity";
 import { useState } from "react";
 import type { PagebuilderType } from "@/types";
+import { convertToSlug } from "@/utils";
 import { SanityImage } from "./elements/sanity-image";
 
 type InferredJambImageGridProps = PagebuilderType<"jambImageGrid">;
@@ -20,7 +21,9 @@ function DescriptionWithReadMore({
   const cleanDescription = stegaClean(description);
 
   if (cleanDescription && cleanDescription.length <= maxLength) {
-    return <p className="flex-1 text-base leading-[25px]">{cleanDescription}</p>;
+    return (
+      <p className="flex-1 text-base leading-[25px]">{cleanDescription}</p>
+    );
   }
 
   const truncatedText = cleanDescription?.slice(0, maxLength).trim();
@@ -77,6 +80,7 @@ export default function JambImageGrid({
   maxDescriptionLength,
 }: InferredJambImageGridProps) {
   const cleanBackgroundColor = stegaClean(backgroundColor);
+  const cleanTitle = stegaClean(title);
 
   const actualBackgroundColor =
     cleanBackgroundColor === "custom" && customBackgroundColor
@@ -86,13 +90,15 @@ export default function JambImageGrid({
   return (
     <section
       className="py-9"
+      {...(cleanTitle && { id: convertToSlug(cleanTitle) })}
       style={{ backgroundColor: actualBackgroundColor }}
     >
       <div className="container mx-auto space-y-12 px-4 sm:space-y-14 sm:px-6 lg:space-y-16 lg:px-8">
-        {title && 
-        <h3 className="text-balance text-center font-medium text-2xl capitalize leading-[18px]">
-          {title}
-        </h3>}
+        {title && (
+          <h3 className="text-balance text-center font-medium text-2xl capitalize leading-[18px]">
+            {title}
+          </h3>
+        )}
 
         <div className="grid grid-cols-1 justify-center gap-8 sm:grid-cols-2 md:grid-cols-3 md:gap-10 lg:grid-cols-4 xl:grid-cols-5">
           {features?.map((feature, index) => (
@@ -107,18 +113,22 @@ export default function JambImageGrid({
                 />
               </div>
               <div className="flex w-full min-w-0 flex-1 flex-col items-center justify-center gap-1">
-                {feature.title && <h4
-                  className={cn(
-                    "mt-2.5 w-full min-w-0 break-words font-bold text-base text-h3 leading-[25px]",
-                    feature?.truncateTitle && "line-clamp-2"
-                  )}
-                >
-                  {feature.title}
-                </h4>}
-                {feature.description && <DescriptionWithReadMore
-                  description={feature.description}
-                  maxLength={maxDescriptionLength}
-                />}
+                {feature.title && (
+                  <h4
+                    className={cn(
+                      "mt-2.5 w-full min-w-0 break-words font-bold text-base text-h3 leading-[25px]",
+                      feature?.truncateTitle && "line-clamp-2"
+                    )}
+                  >
+                    {feature.title}
+                  </h4>
+                )}
+                {feature.description && (
+                  <DescriptionWithReadMore
+                    description={feature.description}
+                    maxLength={maxDescriptionLength}
+                  />
+                )}
               </div>
             </div>
           ))}
