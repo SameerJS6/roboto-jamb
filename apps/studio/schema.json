@@ -623,7 +623,7 @@
           "value": {
             "type": "string"
           },
-          "optional": false
+          "optional": true
         },
         "backgroundColor": {
           "type": "objectAttribute",
@@ -758,14 +758,14 @@
                   "value": {
                     "type": "string"
                   },
-                  "optional": false
+                  "optional": true
                 },
                 "description": {
                   "type": "objectAttribute",
                   "value": {
                     "type": "string"
                   },
-                  "optional": false
+                  "optional": true
                 },
                 "truncateTitle": {
                   "type": "objectAttribute",
