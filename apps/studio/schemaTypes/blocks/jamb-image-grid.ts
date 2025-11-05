@@ -148,6 +148,22 @@ export const jambImageGrid = defineType({
       validation: (rule) =>
         rule.min(MINIMUM_DESCRIPTION_LENGTH).max(MAX_DESCRIPTION_LENGHT).required(),
     }),
+    defineField({
+      name: "allowNavigation",
+      type: "boolean",
+      title: "Allow Navigation",
+      description:
+        "Enable this to allow this section to be linked from the hero navigation. Title is required when enabled.",
+      initialValue: false,
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          const parent = context.parent as { title?: string };
+          if (value === true && !parent?.title?.trim()) {
+            return "Title is required when navigation is enabled.";
+          }
+          return true;
+        }),
+    }),
   ],
   preview: {
     select: {

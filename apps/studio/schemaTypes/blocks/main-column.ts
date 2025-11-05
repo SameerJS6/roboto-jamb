@@ -7,6 +7,11 @@ const desktopLayoutOptions = ["row", "row-reverse"];
 const mobileLayoutOptions = ["column", "column-reverse"];
 const imageFillOptions = ["contain", "cover"];
 const ctaLayoutOptions = ["column", "row"];
+
+const navigationSlugFieldOptions = [
+  { title: "Title", value: "title" },
+  { title: "Headline", value: "headline" },
+];
 const backgroundColorOptions = [
   { title: "Transparent", value: "transparent" },
   { title: "Muted", value: "#DFDAD7" },
@@ -145,6 +150,53 @@ export const mainColumn = defineType({
       options: createRadioListLayout(ctaLayoutOptions, {
         direction: "horizontal",
       }),
+    }),
+    defineField({
+      name: "allowNavigation",
+      type: "boolean",
+      title: "Allow Navigation",
+      description:
+        "Enable this to allow this section to be linked from the hero navigation. Title is required when enabled.",
+      initialValue: false,
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          const parent = context.parent as { title?: string };
+          if (value === true && !parent?.title?.trim()) {
+            return "Title is required when navigation is enabled.";
+          }
+          return true;
+        }),
+    }),
+    defineField({
+      name: "navigationSlugField",
+      type: "string",
+      title: "Navigation Slug Field",
+      description:
+        "Choose which field to use for generating the navigation link slug and section ID",
+      initialValue: "title",
+      options: createRadioListLayout(navigationSlugFieldOptions, {
+        direction: "horizontal",
+      }),
+      hidden: ({ parent }) => parent?.allowNavigation !== true,
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          const parent = context.parent as {
+            allowNavigation?: boolean;
+            title?: string;
+            headline?: string;
+          };
+
+          if (parent?.allowNavigation === true) {
+            if (value === "headline" && !parent?.headline?.trim()) {
+              return "Headline is required when using headline for navigation slug.";
+            }
+
+            if (value === "title" && !parent?.title?.trim()) {
+              return "Title is required when using title for navigation slug.";
+            }
+          }
+          return true;
+        }),
     }),
   ],
   preview: {
