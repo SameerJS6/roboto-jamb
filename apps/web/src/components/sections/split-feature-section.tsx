@@ -100,11 +100,12 @@ export default function SplitFeatureSection({
               )}
             >
               <SanityButtons
-                buttonClassName="border-[#737373] text-[#737373] hover:bg-muted/50"
+                buttonClassName="border-[#737373] text-[#737373] w-fit hover:bg-muted/50"
                 buttons={buttons}
                 className={cn(
-                  cleanCTALayout === "column" && "flex flex-col gap-2",
-                  cleanCTALayout === "row" && "flex flex-row gap-2"
+                  cleanCTALayout === "column" &&
+                    "flex flex-col items-center justify-center gap-2 sm:flex-col",
+                  cleanCTALayout === "row" && "flex flex-row gap-2 sm:flex-row"
                 )}
               />
             </div>

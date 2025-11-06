@@ -25,6 +25,7 @@ export default function ImageGrid({
   features,
   maxDescriptionLength,
 }: ImageGridProps) {
+  const MAX_GRID_COLS = 5;
   const cleanBackgroundColor = stegaClean(backgroundColor);
   const cleanTitle = stegaClean(title);
 
@@ -46,7 +47,12 @@ export default function ImageGrid({
           </h3>
         )}
 
-        <div className="grid grid-cols-1 justify-center gap-8 sm:grid-cols-2 md:grid-cols-3 md:gap-10 lg:grid-cols-4 xl:grid-cols-5">
+        <div
+          className={cn(
+            "grid justify-center gap-8 sm:grid-cols-2 md:grid-cols-3 md:gap-10 lg:grid-cols-4",
+            features?.length >= MAX_GRID_COLS && "xl:grid-cols-5"
+          )}
+        >
           {features?.map((feature, index) => (
             <div
               className="flex min-w-0 flex-col items-center justify-start gap-4 text-center"
