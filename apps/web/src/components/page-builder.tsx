@@ -186,7 +186,7 @@ export function PageBuilder({
   return (
     <section
       aria-label="Page content"
-      className="mx-auto flex flex-col gap-16"
+      className="mx-auto flex flex-col"
       data-sanity={containerDataAttribute}
     >
       {blocks.map(renderBlock)}
