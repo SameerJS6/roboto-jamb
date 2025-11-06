@@ -2,9 +2,9 @@
 
 import { Button } from "@workspace/ui/components/button";
 import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { Logo } from "@/components/logo";
-import { useScrollDirection } from "@/hoooks/use-scroll-direction";
 import type { QueryGlobalSeoSettingsResult } from "@/lib/sanity/sanity.types";
 
 type NavigationData = {
@@ -52,7 +52,27 @@ export function Navbar({
   settingsData: QueryGlobalSeoSettingsResult;
 }) {
   const SCROLL_THRESHOLD = 200;
-  const isVisible = useScrollDirection(SCROLL_THRESHOLD);
+  const [isVisible, setIsVisible] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentPosition = window.scrollY;
+      if (
+        currentPosition > SCROLL_THRESHOLD &&
+        currentPosition < scrollPosition
+      ) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+
+      setScrollPosition(currentPosition);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [scrollPosition]);
 
   const { data, error, isLoading } = useSWR<NavigationData>(
     "/api/navigation",
