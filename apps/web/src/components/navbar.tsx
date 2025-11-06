@@ -88,6 +88,7 @@ export function Navbar({
         opacity: isVisible ? 1 : 0,
       }}
       className="pointer-events-none sticky top-0 z-9999999 w-full"
+      initial={{ opacity: 0 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >
       <div className="container pointer-events-auto mx-auto px-4 py-6">
