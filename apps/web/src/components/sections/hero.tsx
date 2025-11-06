@@ -14,14 +14,27 @@ import type { PageBuilderBlock } from "@/components/page-builder";
 import { staggerContainer, staggerItem } from "@/lib/motion-variants";
 import type { PagebuilderType } from "@/types";
 import { generateNavigationLinks } from "@/utils/navigation";
+import { getSpacingStyles } from "@/utils/spacing";
 
 type HeroProps = PagebuilderType<"hero"> & {
   allBlocks: PageBuilderBlock[];
 };
 
-export default function Hero({ image, imageFill, allBlocks }: HeroProps) {
+export default function Hero({
+  image,
+  imageFill,
+  spacingMode,
+  spacing,
+  topSpacing,
+  bottomSpacing,
+  allBlocks,
+}: HeroProps) {
   const cleanImage = stegaClean(image);
   const cleanImageFill = stegaClean(imageFill);
+  const cleanSpacingMode = stegaClean(spacingMode);
+  const cleanSpacing = stegaClean(spacing);
+  const cleanTopSpacing = stegaClean(topSpacing);
+  const cleanBottomSpacing = stegaClean(bottomSpacing);
   const navigationLinks = generateNavigationLinks(allBlocks);
 
   const maskPosition = useMotionValue("150% 0%");
@@ -37,7 +50,15 @@ export default function Hero({ image, imageFill, allBlocks }: HeroProps) {
   }, [maskPosition]);
 
   return (
-    <section className="container mx-auto px-4 sm:px-6">
+    <section
+      className="container mx-auto px-4 sm:px-6"
+      style={getSpacingStyles({
+        spacingMode: cleanSpacingMode,
+        spacing: cleanSpacing,
+        topSpacing: cleanTopSpacing,
+        bottomSpacing: cleanBottomSpacing,
+      })}
+    >
       {cleanImage?.id && (
         <>
           <motion.div

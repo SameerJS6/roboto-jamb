@@ -8,6 +8,7 @@ import { SanityImage } from "@/components/elements/sanity-image";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/motion-variants";
 import type { PagebuilderType } from "@/types";
 import { convertToSlug } from "@/utils";
+import { getSpacingStyles } from "@/utils/spacing";
 
 type SplitFeatureSectionProps = PagebuilderType<"splitFeatureSection">;
 type SplitFeatureSectionImageProps = {
@@ -41,6 +42,11 @@ export default function SplitFeatureSection({
   mobileLayoutDirection = "column",
   buttons,
   ctaLayout = "row",
+  spacingMode,
+  spacing,
+  padding,
+  topSpacing,
+  bottomSpacing,
   navigationSlugField,
 }: SplitFeatureSectionProps) {
   const cleanBackgroundColor = stegaClean(backgroundColor);
@@ -49,6 +55,11 @@ export default function SplitFeatureSection({
 
   const cleanCTALayout = stegaClean(ctaLayout);
   const cleanImageFill = stegaClean(imageFill);
+  const cleanSpacingMode = stegaClean(spacingMode);
+  const cleanSpacing = stegaClean(spacing);
+  const cleanTopSpacing = stegaClean(topSpacing);
+  const cleanBottomSpacing = stegaClean(bottomSpacing);
+  const cleanPadding = stegaClean(padding);
 
   const actualBackgroundColor =
     cleanBackgroundColor === "custom" && customBackgroundColor
@@ -63,9 +74,17 @@ export default function SplitFeatureSection({
 
   return (
     <section
-      className="scroll-my-20 py-9"
+      className={cn("scroll-my-20 py-9", cleanPadding === "large" && "py-32")}
       {...(slugSource && { id: convertToSlug(slugSource) })}
-      style={{ backgroundColor: actualBackgroundColor }}
+      style={{
+        backgroundColor: actualBackgroundColor,
+        ...getSpacingStyles({
+          spacingMode: cleanSpacingMode,
+          spacing: cleanSpacing,
+          topSpacing: cleanTopSpacing,
+          bottomSpacing: cleanBottomSpacing,
+        }),
+      }}
     >
       <div
         className={cn(
@@ -112,7 +131,7 @@ export default function SplitFeatureSection({
               variants={staggerItem}
             >
               <SanityButtons
-                buttonClassName="border-[#737373] text-[#737373] w-fit hover:bg-muted/50"
+                buttonClassName="border-[#737373]  text-[#737373] w-fit hover:bg-muted/50"
                 buttons={buttons}
                 className={cn(
                   cleanCTALayout === "column" &&

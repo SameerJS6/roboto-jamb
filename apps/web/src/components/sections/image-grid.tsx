@@ -9,6 +9,7 @@ import { SanityImage } from "@/components/elements/sanity-image";
 import { staggerContainer, staggerItem } from "@/lib/motion-variants";
 import type { PagebuilderType } from "@/types";
 import { convertToSlug } from "@/utils";
+import { getSpacingStyles } from "@/utils/spacing";
 
 type ImageGridProps = PagebuilderType<"imageGrid">;
 type DescriptionWithReadMoreProps = {
@@ -22,14 +23,22 @@ type FeatureImageProps = {
 
 export default function ImageGrid({
   title,
-  backgroundColor = "#DFDAD7",
+  backgroundColor = "#E3E3E3",
   customBackgroundColor,
   features,
   maxDescriptionLength,
+  spacingMode,
+  spacing,
+  topSpacing,
+  bottomSpacing,
 }: ImageGridProps) {
   const MAX_GRID_COLS = 5;
   const cleanBackgroundColor = stegaClean(backgroundColor);
   const cleanTitle = stegaClean(title);
+  const cleanSpacingMode = stegaClean(spacingMode);
+  const cleanSpacing = stegaClean(spacing);
+  const cleanTopSpacing = stegaClean(topSpacing);
+  const cleanBottomSpacing = stegaClean(bottomSpacing);
 
   const actualBackgroundColor =
     cleanBackgroundColor === "custom" && customBackgroundColor
@@ -40,7 +49,15 @@ export default function ImageGrid({
     <section
       className="scroll-my-20 py-9"
       {...(cleanTitle && { id: convertToSlug(cleanTitle) })}
-      style={{ backgroundColor: actualBackgroundColor }}
+      style={{
+        backgroundColor: actualBackgroundColor,
+        ...getSpacingStyles({
+          spacingMode: cleanSpacingMode,
+          spacing: cleanSpacing,
+          topSpacing: cleanTopSpacing,
+          bottomSpacing: cleanBottomSpacing,
+        }),
+      }}
     >
       <motion.div
         className="container mx-auto space-y-12 px-4 sm:space-y-14 sm:px-6 lg:space-y-16 lg:px-8"
