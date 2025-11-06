@@ -151,9 +151,9 @@ export type Redirect = {
   permanent?: "true" | "false";
 };
 
-export type JambFooter = {
+export type Footer = {
   _id: string;
-  _type: "jambFooter";
+  _type: "footer";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -217,27 +217,6 @@ export type Navbar = {
   buttons?: Array<{
     _key: string;
   } & Button>;
-};
-
-export type Footer = {
-  _id: string;
-  _type: "footer";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  label: string;
-  subtitle?: string;
-  columns?: Array<{
-    title?: string;
-    links?: Array<{
-      name?: string;
-      url?: CustomUrl;
-      _type: "footerColumnLink";
-      _key: string;
-    }>;
-    _type: "footerColumn";
-    _key: string;
-  }>;
 };
 
 export type CustomUrl = {
@@ -602,7 +581,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = SplitFeatureSection | ImageGrid | Hero | PageBuilder | Button | RichText | Redirect | JambFooter | Navbar | Footer | CustomUrl | Settings | HomePage | Page | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | IconPicker | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = SplitFeatureSection | ImageGrid | Hero | PageBuilder | Button | RichText | Redirect | Footer | Navbar | CustomUrl | Settings | HomePage | Page | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | IconPicker | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../web/src/lib/sanity/query.ts
 // Variable: queryImageType
@@ -918,11 +897,11 @@ export type QueryGenericPageOGDataResult = {
   logo: string | null;
   date: string;
 } | null;
-// Variable: queryJambFooterData
-// Query: *[_type == "jambFooter" && _id == "jambFooter"][0]{    _id,    _type,    _createdAt,    _updatedAt,    contactInfo {      _type,      phone,      addressLine1,      addressLine2,      email    },    newsletter {      _type,      title,      inputPlaceholder,      buttonText,      privacyText,      "privacyPolicyLink": select(        defined(privacyPolicyLink.url.type) => select(          privacyPolicyLink.url.type == "internal" => privacyPolicyLink.url.internal->slug.current,          privacyPolicyLink.url.type == "external" => privacyPolicyLink.url.external,          ""        ),        ""      )    },    columns[]{      _key,      _type,      sections[]{        _key,        _type,        title,        isStandalone,        links[]{          _key,          _type,          label,          "href": select(            url.type == "internal" => url.internal->slug.current,            url.type == "external" => url.external,            url.href          )        }      }    }  }
-export type QueryJambFooterDataResult = {
+// Variable: queryFooterData
+// Query: *[_type == "footer" && _id == "footer"][0]{    _id,    _type,    _createdAt,    _updatedAt,    contactInfo {      _type,      phone,      addressLine1,      addressLine2,      email    },    newsletter {      _type,      title,      inputPlaceholder,      buttonText,      privacyText,      "privacyPolicyLink": select(        defined(privacyPolicyLink.url.type) => select(          privacyPolicyLink.url.type == "internal" => privacyPolicyLink.url.internal->slug.current,          privacyPolicyLink.url.type == "external" => privacyPolicyLink.url.external,          ""        ),        ""      )    },    columns[]{      _key,      _type,      sections[]{        _key,        _type,        title,        isStandalone,        links[]{          _key,          _type,          label,          "href": select(            url.type == "internal" => url.internal->slug.current,            url.type == "external" => url.external,            url.href          )        }      }    }  }
+export type QueryFooterDataResult = {
   _id: string;
-  _type: "jambFooter";
+  _type: "footer";
   _createdAt: string;
   _updatedAt: string;
   contactInfo: {
@@ -956,22 +935,6 @@ export type QueryJambFooterDataResult = {
       }> | null;
     }>;
   }>;
-} | null;
-// Variable: queryFooterData
-// Query: *[_type == "footer" && _id == "footer"][0]{    _id,    subtitle,    columns[]{      _key,      title,      links[]{        _key,        name,        "openInNewTab": url.openInNewTab,        "href": select(          url.type == "internal" => url.internal->slug.current,          url.type == "external" => url.external,          url.href        ),      }    }  }
-export type QueryFooterDataResult = {
-  _id: string;
-  subtitle: string | null;
-  columns: Array<{
-    _key: string;
-    title: string | null;
-    links: Array<{
-      _key: string;
-      name: string | null;
-      openInNewTab: boolean | null;
-      href: string | null;
-    }> | null;
-  }> | null;
 } | null;
 // Variable: queryNavbarData
 // Query: *[_type == "navbar" && _id == "navbar"][0]{    _id,    columns[]{      _key,      _type == "navbarColumn" => {        "type": "column",        title,        links[]{          _key,          name,          icon,          description,          "openInNewTab": url.openInNewTab,          "href": select(            url.type == "internal" => url.internal->slug.current,            url.type == "external" => url.external,            url.href          )        }      },      _type == "navbarLink" => {        "type": "link",        name,        description,        "openInNewTab": url.openInNewTab,        "href": select(          url.type == "internal" => url.internal->slug.current,          url.type == "external" => url.external,          url.href        )      }    },      buttons[]{    text,    variant,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  }
@@ -1015,7 +978,7 @@ export type QuerySitemapDataResult = {
   }>;
 };
 // Variable: queryGlobalSeoSettings
-// Query: *[_type == "settings"][0]{    _id,    _type,    siteTitle,    logo {        "id": asset._ref,  "preview": asset->metadata.lqip,  hotspot {    x,    y  },  crop {    bottom,    left,    right,    top  }    },    siteDescription,    socialLinks{      linkedin,      facebook,      twitter,      instagram,      youtube    }  }
+// Query: *[_type == "settings"][0]{    _id,    _type,    siteTitle,    logo {        "id": asset._ref,  "preview": asset->metadata.lqip,  hotspot {    x,    y  },  crop {    bottom,    left,    right,    top  }    },    siteDescription,      }
 export type QueryGlobalSeoSettingsResult = {
   _id: string;
   _type: "settings";
@@ -1035,7 +998,6 @@ export type QueryGlobalSeoSettingsResult = {
     } | null;
   } | null;
   siteDescription: string;
-  socialLinks: null;
 } | null;
 // Variable: querySettingsData
 // Query: *[_type == "settings"][0]{    _id,    _type,    siteTitle,    siteDescription,    "logo": logo.asset->url + "?w=80&h=40&dpr=3&fit=max&q=100",    "contactEmail": contactEmail,  }
@@ -1066,11 +1028,10 @@ declare module "@sanity/client" {
     "\n  *[_type == \"homePage\" && _id == $id][0]{\n    \n  _id,\n  _type,\n  \"title\": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  \"description\": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  \"image\": image.asset->url + \"?w=566&h=566&dpr=2&fit=max\",\n  \"dominantColor\": image.asset->metadata.palette.dominant.background,\n  \"seoImage\": seoImage.asset->url + \"?w=1200&h=630&dpr=2&fit=max\",\n  \"logo\": *[_type == \"settings\"][0].logo.asset->url + \"?w=80&h=40&dpr=3&fit=max&q=100\",\n  \"date\": coalesce(date, _createdAt)\n\n  }\n  ": QueryHomePageOGDataResult;
     "\n  *[_type == \"page\" && _id == $id][0]{\n    \n  _id,\n  _type,\n  \"title\": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  \"description\": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  \"image\": image.asset->url + \"?w=566&h=566&dpr=2&fit=max\",\n  \"dominantColor\": image.asset->metadata.palette.dominant.background,\n  \"seoImage\": seoImage.asset->url + \"?w=1200&h=630&dpr=2&fit=max\",\n  \"logo\": *[_type == \"settings\"][0].logo.asset->url + \"?w=80&h=40&dpr=3&fit=max&q=100\",\n  \"date\": coalesce(date, _createdAt)\n\n  }\n": QuerySlugPageOGDataResult;
     "\n  *[ defined(slug.current) && _id == $id][0]{\n    \n  _id,\n  _type,\n  \"title\": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  \"description\": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  \"image\": image.asset->url + \"?w=566&h=566&dpr=2&fit=max\",\n  \"dominantColor\": image.asset->metadata.palette.dominant.background,\n  \"seoImage\": seoImage.asset->url + \"?w=1200&h=630&dpr=2&fit=max\",\n  \"logo\": *[_type == \"settings\"][0].logo.asset->url + \"?w=80&h=40&dpr=3&fit=max&q=100\",\n  \"date\": coalesce(date, _createdAt)\n\n  }\n": QueryGenericPageOGDataResult;
-    "\n  *[_type == \"jambFooter\" && _id == \"jambFooter\"][0]{\n    _id,\n    _type,\n    _createdAt,\n    _updatedAt,\n    contactInfo {\n      _type,\n      phone,\n      addressLine1,\n      addressLine2,\n      email\n    },\n    newsletter {\n      _type,\n      title,\n      inputPlaceholder,\n      buttonText,\n      privacyText,\n      \"privacyPolicyLink\": select(\n        defined(privacyPolicyLink.url.type) => select(\n          privacyPolicyLink.url.type == \"internal\" => privacyPolicyLink.url.internal->slug.current,\n          privacyPolicyLink.url.type == \"external\" => privacyPolicyLink.url.external,\n          \"\"\n        ),\n        \"\"\n      )\n    },\n    columns[]{\n      _key,\n      _type,\n      sections[]{\n        _key,\n        _type,\n        title,\n        isStandalone,\n        links[]{\n          _key,\n          _type,\n          label,\n          \"href\": select(\n            url.type == \"internal\" => url.internal->slug.current,\n            url.type == \"external\" => url.external,\n            url.href\n          )\n        }\n      }\n    }\n  }\n": QueryJambFooterDataResult;
-    "\n  *[_type == \"footer\" && _id == \"footer\"][0]{\n    _id,\n    subtitle,\n    columns[]{\n      _key,\n      title,\n      links[]{\n        _key,\n        name,\n        \"openInNewTab\": url.openInNewTab,\n        \"href\": select(\n          url.type == \"internal\" => url.internal->slug.current,\n          url.type == \"external\" => url.external,\n          url.href\n        ),\n      }\n    }\n  }\n": QueryFooterDataResult;
+    "\n  *[_type == \"footer\" && _id == \"footer\"][0]{\n    _id,\n    _type,\n    _createdAt,\n    _updatedAt,\n    contactInfo {\n      _type,\n      phone,\n      addressLine1,\n      addressLine2,\n      email\n    },\n    newsletter {\n      _type,\n      title,\n      inputPlaceholder,\n      buttonText,\n      privacyText,\n      \"privacyPolicyLink\": select(\n        defined(privacyPolicyLink.url.type) => select(\n          privacyPolicyLink.url.type == \"internal\" => privacyPolicyLink.url.internal->slug.current,\n          privacyPolicyLink.url.type == \"external\" => privacyPolicyLink.url.external,\n          \"\"\n        ),\n        \"\"\n      )\n    },\n    columns[]{\n      _key,\n      _type,\n      sections[]{\n        _key,\n        _type,\n        title,\n        isStandalone,\n        links[]{\n          _key,\n          _type,\n          label,\n          \"href\": select(\n            url.type == \"internal\" => url.internal->slug.current,\n            url.type == \"external\" => url.external,\n            url.href\n          )\n        }\n      }\n    }\n  }\n": QueryFooterDataResult;
     "\n  *[_type == \"navbar\" && _id == \"navbar\"][0]{\n    _id,\n    columns[]{\n      _key,\n      _type == \"navbarColumn\" => {\n        \"type\": \"column\",\n        title,\n        links[]{\n          _key,\n          name,\n          icon,\n          description,\n          \"openInNewTab\": url.openInNewTab,\n          \"href\": select(\n            url.type == \"internal\" => url.internal->slug.current,\n            url.type == \"external\" => url.external,\n            url.href\n          )\n        }\n      },\n      _type == \"navbarLink\" => {\n        \"type\": \"link\",\n        name,\n        description,\n        \"openInNewTab\": url.openInNewTab,\n        \"href\": select(\n          url.type == \"internal\" => url.internal->slug.current,\n          url.type == \"external\" => url.external,\n          url.href\n        )\n      }\n    },\n    \n  buttons[]{\n    text,\n    variant,\n    _key,\n    _type,\n    \"openInNewTab\": url.openInNewTab,\n    \"href\": select(\n      url.type == \"internal\" => url.internal->slug.current,\n      url.type == \"external\" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n": QueryNavbarDataResult;
     "{\n  \"slugPages\": *[_type == \"page\" && defined(slug.current)]{\n    \"slug\": slug.current,\n    \"lastModified\": _updatedAt\n  }\n}": QuerySitemapDataResult;
-    "\n  *[_type == \"settings\"][0]{\n    _id,\n    _type,\n    siteTitle,\n    logo {\n      \n  \"id\": asset._ref,\n  \"preview\": asset->metadata.lqip,\n  hotspot {\n    x,\n    y\n  },\n  crop {\n    bottom,\n    left,\n    right,\n    top\n  }\n\n    },\n    siteDescription,\n    socialLinks{\n      linkedin,\n      facebook,\n      twitter,\n      instagram,\n      youtube\n    }\n  }\n": QueryGlobalSeoSettingsResult;
+    "\n  *[_type == \"settings\"][0]{\n    _id,\n    _type,\n    siteTitle,\n    logo {\n      \n  \"id\": asset._ref,\n  \"preview\": asset->metadata.lqip,\n  hotspot {\n    x,\n    y\n  },\n  crop {\n    bottom,\n    left,\n    right,\n    top\n  }\n\n    },\n    siteDescription,\n      }\n": QueryGlobalSeoSettingsResult;
     "\n  *[_type == \"settings\"][0]{\n    _id,\n    _type,\n    siteTitle,\n    siteDescription,\n    \"logo\": logo.asset->url + \"?w=80&h=40&dpr=3&fit=max&q=100\",\n    \"contactEmail\": contactEmail,\n  }\n": QuerySettingsDataResult;
     "\n  *[_type == \"redirect\" && status == \"active\" && defined(source.current) && defined(destination.current)]{\n    \"source\":source.current,\n    \"destination\":destination.current,\n    \"permanent\" : permanent == \"true\"\n  }\n": QueryRedirectsResult;
   }
