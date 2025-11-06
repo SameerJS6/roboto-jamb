@@ -88,13 +88,13 @@
   }
 
   html {
-    @apply scroll-smooth;
+    @apply not-pointer-coarse:no-scrollbar scroll-smooth;
 
-    scrollbar-width: thin;
-    scrollbar-color: var(--foreground) var(--background);
+    /* scrollbar-width: thin;
+    scrollbar-color: var(--foreground) var(--background); */
   }
 
-  html::-webkit-scrollbar {
+  /* html::-webkit-scrollbar {
     width: 8px;
   }
 
@@ -110,7 +110,7 @@
   html::-webkit-scrollbar-thumb:hover {
     background-color: var(--muted-foreground);
   }
-
+ */
   body {
     @apply font-galaxie-copernicus bg-background text-foreground selection:bg-foreground selection:text-background;
   }
@@ -128,4 +128,13 @@
 @utility container {
   --max-w: 1436px;
   @apply !max-w-[var(--max-w)];
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
