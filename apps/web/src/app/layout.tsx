@@ -4,6 +4,7 @@ import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { Suspense } from "react";
 import { preconnect } from "react-dom";
+import CustomScrollbar from "@/components/custom-scrollbar";
 import { FooterServer, FooterSkeleton } from "@/components/footer";
 import { JambFooterServer } from "@/components/jamb-footer-server";
 import { JambFooterSkeleton } from "@/components/jamb-footer-skeleton";
@@ -67,6 +68,7 @@ export default async function RootLayout({
             <FooterServer />
           </Suspense>
           <SanityLive />
+          <CustomScrollbar />
           <CombinedJsonLd includeOrganization includeWebsite />
           {(await draftMode()).isEnabled && (
             <>
