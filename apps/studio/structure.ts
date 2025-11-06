@@ -51,48 +51,6 @@ const createList = ({ S, type, icon, title, id }: CreateList) => {
     .icon(icon ?? File);
 };
 
-// type CreateIndexList = {
-//   S: StructureBuilder;
-//   list: Base;
-//   index: Base<SingletonType>;
-//   context: StructureResolverContext;
-// };
-
-// const createIndexListWithOrderableItems = ({
-//   S,
-//   index,
-//   list,
-//   context,
-// }: CreateIndexList) => {
-//   const indexTitle = index.title ?? getTitleCase(index.type);
-//   const listTitle = list.title ?? getTitleCase(list.type);
-//   return S.listItem()
-//     .title(listTitle)
-//     .icon(index.icon ?? File)
-//     .child(
-//       S.list()
-//         .title(indexTitle)
-//         .items([
-//           S.listItem()
-//             .title(indexTitle)
-//             .icon(index.icon ?? File)
-//             .child(
-//               S.document()
-//                 .views([S.view.form()])
-//                 .schemaType(index.type)
-//                 .documentId(index.type)
-//             ),
-//           orderableDocumentListDeskItem({
-//             type: list.type,
-//             S,
-//             context,
-//             icon: list.icon ?? File,
-//             title: `${listTitle}`,
-//           }),
-//         ])
-//     );
-// };
-
 export const structure = (S: StructureBuilder) =>
   S.list()
     .title("Content")
