@@ -13,6 +13,7 @@ import { Navbar } from "@/components/navbar";
 import PageWideScrollMask from "@/components/page-wide-adaptive-scroll-mask";
 import { PreviewBar } from "@/components/preview-bar";
 import { Providers } from "@/components/providers";
+import { ScrollToTopButton } from "@/components/scroll-to-top";
 import { getNavigationData } from "@/lib/navigation";
 import { SanityLive } from "@/lib/sanity/live";
 
@@ -44,6 +45,7 @@ export default async function RootLayout({
       <body className={`${fontGalaxieCopernicus.variable} antialiased`}>
         <Providers>
           <Navbar navbarData={null} settingsData={nav.settingsData} />
+          <ScrollToTopButton />
           {children}
           {/* Sanity Footer */}
           <Suspense fallback={<JambFooterSkeleton />}>
