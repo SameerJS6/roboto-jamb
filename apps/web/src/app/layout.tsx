@@ -10,6 +10,7 @@ import { JambFooterServer } from "@/components/jamb-footer-server";
 import { JambFooterSkeleton } from "@/components/jamb-footer-skeleton";
 import { CombinedJsonLd } from "@/components/json-ld";
 import { Navbar } from "@/components/navbar";
+import PageWideScrollMask from "@/components/page-wide-adaptive-scroll-mask";
 import { PreviewBar } from "@/components/preview-bar";
 import { Providers } from "@/components/providers";
 import { getNavigationData } from "@/lib/navigation";
@@ -76,6 +77,7 @@ export default async function RootLayout({
               <VisualEditing />
             </>
           )}
+          <PageWideScrollMask />
         </Providers>
       </body>
     </html>
