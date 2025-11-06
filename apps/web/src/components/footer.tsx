@@ -19,23 +19,23 @@ export async function Footer() {
     <footer className="mt-56 bg-muted">
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 gap-8 pb-12 md:grid-cols-2 lg:grid-cols-3">
-          <div className="space-y-1 text-muted-foreground text-sm">
+          <div className="space-y-1 font-medium text-accent text-base leading-[25px]">
             <p>Tel: {footerData.contactInfo?.phone}</p>
             <p>{footerData.contactInfo?.addressLine1}</p>
             <p>{footerData.contactInfo?.addressLine2}</p>
           </div>
 
-          <div className="text-muted-foreground text-sm">
+          <div className="font-medium text-accent text-base leading-[25px]">
             <p>{footerData.contactInfo?.email}</p>
           </div>
 
           <div className="lg:col-span-1">
-            <h3 className="mb-4 text-muted-foreground text-sm">
+            <h3 className="mb-4 text-accent text-sm">
               {footerData.newsletter?.title}
             </h3>
             <div className="flex gap-2">
               <Input
-                className="bg-background"
+                className="border-accent bg-background placeholder:text-accent"
                 placeholder={
                   footerData?.newsletter?.inputPlaceholder ??
                   "Enter your email address"
@@ -43,16 +43,16 @@ export async function Footer() {
                 type="email"
               />
               <Button
-                className="whitespace-nowrap bg-transparent"
+                className="whitespace-nowrap border-accent bg-transparent text-accent hover:bg-foreground/5 hover:text-foreground"
                 variant="outline"
               >
                 {footerData?.newsletter?.buttonText ?? "Subscribe"}
               </Button>
             </div>
             <div className="mt-3 flex items-center gap-2">
-              <Checkbox id="privacy" />
+              <Checkbox className="border-accent" id="privacy" />
               <label
-                className="cursor-pointer text-muted-foreground text-xs"
+                className="cursor-pointer text-accent text-xs"
                 htmlFor="privacy"
               >
                 {footerData?.newsletter?.privacyText ?? "I agree"}
@@ -69,7 +69,7 @@ export async function Footer() {
                   className={sectionIndex > 0 ? "mt-8" : ""}
                   key={section._key}
                 >
-                  <h3 className="mb-4 break-words border-t pt-4 font-semibold text-foreground text-sm">
+                  <h3 className="mb-4 break-words border-t border-t-accent pt-4 font-medium text-base text-foreground leading-[31px]">
                     {section.title}
                   </h3>
                   {!section.isStandalone &&
@@ -79,7 +79,7 @@ export async function Footer() {
                         {section.links.map((link) => (
                           <li key={link._key}>
                             <Link
-                              className="link-effect relative inline-block break-words text-muted-foreground text-sm transition-colors after:bottom-0 hover:after:origin-left hover:after:scale-x-100"
+                              className="link-effect relative inline-block break-words text-accent text-base leading-[31px] transition-colors after:bottom-0 hover:after:origin-left hover:after:scale-x-100"
                               href={link?.href ?? ""}
                             >
                               {link.label}
