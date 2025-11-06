@@ -1,7 +1,6 @@
 import {
   CogIcon,
   File,
-  FileText,
   HomeIcon,
   type LucideIcon,
   PanelBottom,
@@ -132,12 +131,6 @@ export const structure = (S: StructureBuilder) =>
                 type: "settings",
                 title: "Global Settings",
                 icon: CogIcon,
-              }),
-              createSingleTon({
-                S,
-                type: "jambFooter",
-                title: "New Footer",
-                icon: FileText,
               }),
             ])
         ),
