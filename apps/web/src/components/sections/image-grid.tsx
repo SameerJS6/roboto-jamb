@@ -46,6 +46,7 @@ export default function ImageGrid({
         className="container mx-auto space-y-12 px-4 sm:space-y-14 sm:px-6 lg:space-y-16 lg:px-8"
         initial="hidden"
         variants={staggerContainer}
+        viewport={{ once: true }}
         whileInView="visible"
       >
         {title && (
