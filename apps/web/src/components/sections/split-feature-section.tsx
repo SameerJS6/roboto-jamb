@@ -1,10 +1,11 @@
 "use client";
 
 import { cn } from "@workspace/ui/lib/utils";
-import { motion, type Variants } from "motion/react";
+import { motion } from "motion/react";
 import { stegaClean } from "next-sanity";
 import { SanityButtons } from "@/components/elements/sanity-buttons";
 import { SanityImage } from "@/components/elements/sanity-image";
+import { fadeInUp, staggerContainer, staggerItem } from "@/lib/motion-variants";
 import type { PagebuilderType } from "@/types";
 import { convertToSlug } from "@/utils";
 
@@ -60,47 +61,6 @@ export default function SplitFeatureSection({
     title
   );
 
-  const containerVariants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1,
-        ease: "easeInOut",
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  } satisfies Variants;
-
-  const itemVariants = {
-    hidden: {
-      opacity: 0,
-      y: 15,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1,
-        ease: "easeInOut",
-      },
-    },
-  } satisfies Variants;
-
-  const imageVariants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1,
-        ease: "easeInOut",
-      },
-    },
-  } satisfies Variants;
-
   return (
     <section
       className="scroll-my-20 py-9"
@@ -122,34 +82,34 @@ export default function SplitFeatureSection({
               "--order-desktop": cleanDesktopLayoutDirection === "row" ? 1 : 2,
             } as React.CSSProperties
           }
-          variants={containerVariants}
+          variants={staggerContainer}
           viewport={{ once: true, amount: 0.3 }}
           whileInView="visible"
         >
           {headline && (
             <motion.p
               className="min-w-0 break-words text-center font-medium text-sm uppercase leading-[25px] will-change-animate lg:text-base"
-              variants={itemVariants}
+              variants={staggerItem}
             >
               {headline}
             </motion.p>
           )}
           <motion.h2
             className="min-w-0 text-balance break-words text-center font-medium text-3xl leading-[48px] will-change-animate sm:text-2xl lg:text-4xl"
-            variants={itemVariants}
+            variants={staggerItem}
           >
             {title}
           </motion.h2>
           <motion.p
             className="mx-auto min-w-0 max-w-[47ch] break-words font-medium text-sm leading-[25px] will-change-animate lg:text-base"
-            variants={itemVariants}
+            variants={staggerItem}
           >
             {description}
           </motion.p>
           {buttons && buttons.length > 0 && (
             <motion.div
               className="mx-auto mt-3 flex w-fit gap-2 will-change-animate"
-              variants={itemVariants}
+              variants={staggerItem}
             >
               <SanityButtons
                 buttonClassName="border-[#737373] text-[#737373] w-fit hover:bg-muted/50"
@@ -173,7 +133,7 @@ export default function SplitFeatureSection({
               "--order-desktop": cleanDesktopLayoutDirection === "row" ? 2 : 1,
             } as React.CSSProperties
           }
-          variants={imageVariants}
+          variants={fadeInUp}
           viewport={{ once: true, amount: 0.3 }}
           whileInView="visible"
         >
