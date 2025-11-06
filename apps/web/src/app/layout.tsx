@@ -5,9 +5,8 @@ import { VisualEditing } from "next-sanity/visual-editing";
 import { Suspense } from "react";
 import { preconnect } from "react-dom";
 import CustomScrollbar from "@/components/custom-scrollbar";
-import { FooterServer, FooterSkeleton } from "@/components/footer";
-import { JambFooterServer } from "@/components/jamb-footer-server";
-import { JambFooterSkeleton } from "@/components/jamb-footer-skeleton";
+import { Footer } from "@/components/footer";
+import FooterSkeleton from "@/components/footer-skeleton";
 import { CombinedJsonLd } from "@/components/json-ld";
 import { Navbar } from "@/components/navbar";
 import PageWideScrollMask from "@/components/page-wide-adaptive-scroll-mask";
@@ -48,16 +47,16 @@ export default async function RootLayout({
           <ScrollToTopButton />
           {children}
           {/* Sanity Footer */}
-          <Suspense fallback={<JambFooterSkeleton />}>
-            <JambFooterServer />
+          <Suspense fallback={<FooterSkeleton />}>
+            <Footer />
           </Suspense>
           {/* Default Footer */}
-          <div className="mb-8">
-            {/* <div className="mb-2 text-center font-semibold text-lg">
+          {/* <div className="mb-8"> */}
+          {/* <div className="mb-2 text-center font-semibold text-lg">
               Default Footer
             </div> */}
-            {/* <JambFooter footerData={DEFAULT_FOOTER_DATA} /> */}
-          </div>
+          {/* <JambFooter footerData={DEFAULT_FOOTER_DATA} /> */}
+          {/* </div> */}
           {/* Test Footers */}
           {/* {ALL_TEST_FOOTERS.map((testFooter) => (
             <div className="mb-8" key={testFooter.data._id}>
@@ -67,9 +66,9 @@ export default async function RootLayout({
               <JambFooter footerData={testFooter.data} />
             </div>
           ))} */}
-          <Suspense fallback={<FooterSkeleton />}>
+          {/* <Suspense fallback={<FooterSkeleton />}>
             <FooterServer />
-          </Suspense>
+          </Suspense> */}
           <SanityLive />
           <CustomScrollbar />
           <CombinedJsonLd includeOrganization includeWebsite />
