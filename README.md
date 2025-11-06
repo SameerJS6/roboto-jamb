@@ -2,7 +2,7 @@
 
 A Next.js + Sanity Assignment by Roboto Studio.
 
-![Easiest way to build a webpage](./mockup.png)
+![Mockup of Jamb](./mockup.png)
 
 ## Few Highlights
 
