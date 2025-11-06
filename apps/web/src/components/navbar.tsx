@@ -88,12 +88,6 @@ export function Navbar({
         opacity: isVisible ? 1 : 0,
       }}
       className="pointer-events-none sticky top-0 z-9999999 w-full"
-      style={{
-        background:
-          "linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background) / 0.95) 15%, hsl(var(--background) / 0.8) 30%, hsl(var(--background) / 0.5) 50%, hsl(var(--background) / 0.2) 70%, transparent 100%)",
-        backdropFilter: "blur(8px)",
-        WebkitBackdropFilter: "blur(8px)",
-      }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >
       <div className="container pointer-events-auto mx-auto px-4 py-6">
