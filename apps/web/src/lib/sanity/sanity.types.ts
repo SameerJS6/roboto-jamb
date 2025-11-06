@@ -40,6 +40,11 @@ export type SplitFeatureSection = {
     _key: string;
   } & Button>;
   ctaLayout?: "column" | "row";
+  padding: "default" | "large";
+  spacingMode: "same" | "separate";
+  spacing?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+  topSpacing?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+  bottomSpacing?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
   allowNavigation?: boolean;
   navigationSlugField?: "title" | "headline";
 };
@@ -47,7 +52,7 @@ export type SplitFeatureSection = {
 export type ImageGrid = {
   _type: "imageGrid";
   title?: string;
-  backgroundColor: "transparent" | "#DFDAD7" | "custom";
+  backgroundColor: "transparent" | "#E3E3E3" | "custom";
   customBackgroundColor?: string;
   features: Array<{
     image: {
@@ -71,6 +76,10 @@ export type ImageGrid = {
     _key: string;
   }>;
   maxDescriptionLength: number;
+  spacingMode: "same" | "separate";
+  spacing?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+  topSpacing?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+  bottomSpacing?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
   allowNavigation?: boolean;
 };
 
@@ -90,6 +99,10 @@ export type Hero = {
     _type: "image";
   };
   imageFill: "contain" | "cover";
+  spacingMode: "same" | "separate";
+  spacing?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+  topSpacing?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+  bottomSpacing?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
 };
 
 export type PageBuilder = Array<{
@@ -629,11 +642,15 @@ export type QueryHomePageDataResult = {
       } | null;
     };
     imageFill: "contain" | "cover";
+    spacingMode: "same" | "separate";
+    spacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
+    topSpacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
+    bottomSpacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
   } | {
     _key: string;
     _type: "imageGrid";
     title: string | null;
-    backgroundColor: "#DFDAD7" | "custom" | "transparent";
+    backgroundColor: "#E3E3E3" | "custom" | "transparent";
     customBackgroundColor: string | null;
     features: Array<{
       image: {
@@ -659,6 +676,10 @@ export type QueryHomePageDataResult = {
       _key: string;
     }>;
     maxDescriptionLength: number;
+    spacingMode: "same" | "separate";
+    spacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
+    topSpacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
+    bottomSpacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
     allowNavigation: boolean | null;
     imageFill: null;
   } | {
@@ -696,6 +717,11 @@ export type QueryHomePageDataResult = {
       href: string | null;
     }> | null;
     ctaLayout?: "column" | "row";
+    padding: "default" | "large";
+    spacingMode: "same" | "separate";
+    spacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
+    topSpacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
+    bottomSpacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
     allowNavigation: boolean | null;
     navigationSlugField: "headline" | "title" | null;
   }> | null;
@@ -757,11 +783,15 @@ export type QuerySlugPageDataResult = {
       } | null;
     };
     imageFill: "contain" | "cover";
+    spacingMode: "same" | "separate";
+    spacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
+    topSpacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
+    bottomSpacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
   } | {
     _key: string;
     _type: "imageGrid";
     title: string | null;
-    backgroundColor: "#DFDAD7" | "custom" | "transparent";
+    backgroundColor: "#E3E3E3" | "custom" | "transparent";
     customBackgroundColor: string | null;
     features: Array<{
       image: {
@@ -787,6 +817,10 @@ export type QuerySlugPageDataResult = {
       _key: string;
     }>;
     maxDescriptionLength: number;
+    spacingMode: "same" | "separate";
+    spacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
+    topSpacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
+    bottomSpacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
     allowNavigation: boolean | null;
     imageFill: null;
   } | {
@@ -824,6 +858,11 @@ export type QuerySlugPageDataResult = {
       href: string | null;
     }> | null;
     ctaLayout?: "column" | "row";
+    padding: "default" | "large";
+    spacingMode: "same" | "separate";
+    spacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
+    topSpacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
+    bottomSpacing?: "2xl" | "3xl" | "4xl" | "lg" | "md" | "none" | "sm" | "xl";
     allowNavigation: boolean | null;
     navigationSlugField: "headline" | "title" | null;
   }> | null;
