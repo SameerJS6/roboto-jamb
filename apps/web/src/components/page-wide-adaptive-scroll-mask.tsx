@@ -46,13 +46,21 @@ export default function PageWideScrollMask() {
           y: showTopMask ? 0 : -MASK_TRANSLATE,
         }}
         aria-hidden="true"
-        className="pointer-events-none fixed top-0 z-50 h-16 w-full bg-gradient-to-b from-background"
+        className="pointer-events-none fixed top-0 z-50 h-20 w-full md:h-24"
         initial={{
           opacity: 0,
           y: -MASK_TRANSLATE,
         }}
         style={{
           pointerEvents: "none",
+          background:
+            "linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background) / 0.95) 15%, hsl(var(--background) / 0.8) 30%, hsl(var(--background) / 0.5) 50%, hsl(var(--background) / 0.2) 70%, transparent 100%)",
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
+          maskImage:
+            "linear-gradient(to bottom, black 0%, black 40%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, black 0%, black 40%, transparent 100%)",
         }}
         transition={{
           duration: 0.3,
@@ -65,13 +73,22 @@ export default function PageWideScrollMask() {
           y: showBottomMask ? 0 : MASK_TRANSLATE,
         }}
         aria-hidden="true"
-        className="pointer-events-none fixed bottom-0 z-50 h-16 w-full bg-gradient-to-t from-background"
+        className="pointer-events-none fixed bottom-0 z-50 h-20 w-full md:h-24"
         initial={{
           opacity: 0,
           y: MASK_TRANSLATE,
         }}
         style={{
           pointerEvents: "none",
+          background:
+            "linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.95) 15%, hsl(var(--background) / 0.8) 30%, hsl(var(--background) / 0.5) 50%, hsl(var(--background) / 0.2) 70%, transparent 100%)",
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
+          filter: "brightness(0.9)",
+          maskImage:
+            "linear-gradient(to top, black 0%, black 40%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to top, black 0%, black 40%, transparent 100%)",
         }}
         transition={{
           duration: 0.3,
