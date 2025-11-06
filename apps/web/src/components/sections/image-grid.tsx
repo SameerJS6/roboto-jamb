@@ -2,6 +2,7 @@
 
 import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
+import { motion, type Variants } from "motion/react";
 import { stegaClean } from "next-sanity";
 import { useState } from "react";
 import { SanityImage } from "@/components/elements/sanity-image";
@@ -34,17 +35,56 @@ export default function ImageGrid({
       ? stegaClean(customBackgroundColor)
       : cleanBackgroundColor;
 
+  const containerVariants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+        ease: "easeInOut",
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  } satisfies Variants;
+
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 15,
+    },
+    visible: (index) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+        ease: "easeInOut",
+        delay: index * 0.2,
+      },
+    }),
+  } satisfies Variants;
+
   return (
     <section
       className="scroll-my-20 py-9"
       {...(cleanTitle && { id: convertToSlug(cleanTitle) })}
       style={{ backgroundColor: actualBackgroundColor }}
     >
-      <div className="container mx-auto space-y-12 px-4 sm:space-y-14 sm:px-6 lg:space-y-16 lg:px-8">
+      <motion.div
+        className="container mx-auto space-y-12 px-4 sm:space-y-14 sm:px-6 lg:space-y-16 lg:px-8"
+        initial="hidden"
+        variants={containerVariants}
+        whileInView="visible"
+      >
         {title && (
-          <h3 className="text-balance text-center font-medium text-2xl capitalize leading-[25px]">
+          <motion.h3
+            className="text-balance text-center font-medium text-2xl capitalize leading-[25px] will-change-animate"
+            custom={0}
+            variants={itemVariants}
+          >
             {title}
-          </h3>
+          </motion.h3>
         )}
 
         <div
@@ -54,9 +94,11 @@ export default function ImageGrid({
           )}
         >
           {features?.map((feature, index) => (
-            <div
-              className="flex min-w-0 flex-col items-center justify-start gap-4 text-center"
+            <motion.div
+              className="flex min-w-0 flex-col items-center justify-start gap-4 text-center will-change-animate"
+              custom={index}
               key={`jamb-image-grid-feature-${feature.title}-${index}`}
+              variants={itemVariants}
             >
               <div className="aspect-square w-full shrink-0">
                 <FeatureImage
@@ -82,10 +124,10 @@ export default function ImageGrid({
                   />
                 )}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

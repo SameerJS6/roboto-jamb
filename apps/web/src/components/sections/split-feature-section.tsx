@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@workspace/ui/lib/utils";
+import { motion, type Variants } from "motion/react";
 import { stegaClean } from "next-sanity";
 import { SanityButtons } from "@/components/elements/sanity-buttons";
 import { SanityImage } from "@/components/elements/sanity-image";
@@ -59,6 +60,47 @@ export default function SplitFeatureSection({
     title
   );
 
+  const containerVariants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+        ease: "easeInOut",
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  } satisfies Variants;
+
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 15,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+        ease: "easeInOut",
+      },
+    },
+  } satisfies Variants;
+
+  const imageVariants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+        ease: "easeInOut",
+      },
+    },
+  } satisfies Variants;
+
   return (
     <section
       className="scroll-my-20 py-9"
@@ -71,28 +113,44 @@ export default function SplitFeatureSection({
         )}
         style={{ "--max-w": "1336px" } as React.CSSProperties}
       >
-        <div
-          className="order-(--order-mobile) flex min-w-0 flex-col justify-center gap-4 sm:gap-5 md:order-(--order-desktop)"
+        <motion.div
+          className="order-(--order-mobile) flex min-w-0 flex-col justify-center gap-4 will-change-animate sm:gap-5 md:order-(--order-desktop)"
+          initial="hidden"
           style={
             {
               "--order-mobile": cleanMobileLayoutDirection === "column" ? 1 : 2,
               "--order-desktop": cleanDesktopLayoutDirection === "row" ? 1 : 2,
             } as React.CSSProperties
           }
+          variants={containerVariants}
+          viewport={{ once: true, amount: 0.3 }}
+          whileInView="visible"
         >
           {headline && (
-            <p className="min-w-0 break-words text-center font-medium text-sm uppercase leading-[25px] lg:text-base">
+            <motion.p
+              className="min-w-0 break-words text-center font-medium text-sm uppercase leading-[25px] will-change-animate lg:text-base"
+              variants={itemVariants}
+            >
               {headline}
-            </p>
+            </motion.p>
           )}
-          <h2 className="min-w-0 text-balance break-words text-center font-medium text-3xl leading-[48px] sm:text-2xl lg:text-4xl">
+          <motion.h2
+            className="min-w-0 text-balance break-words text-center font-medium text-3xl leading-[48px] will-change-animate sm:text-2xl lg:text-4xl"
+            variants={itemVariants}
+          >
             {title}
-          </h2>
-          <p className="mx-auto min-w-0 max-w-[47ch] break-words font-medium text-sm leading-[25px] lg:text-base">
+          </motion.h2>
+          <motion.p
+            className="mx-auto min-w-0 max-w-[47ch] break-words font-medium text-sm leading-[25px] will-change-animate lg:text-base"
+            variants={itemVariants}
+          >
             {description}
-          </p>
+          </motion.p>
           {buttons && buttons.length > 0 && (
-            <div className="mx-auto mt-3 flex w-fit gap-2">
+            <motion.div
+              className="mx-auto mt-3 flex w-fit gap-2 will-change-animate"
+              variants={itemVariants}
+            >
               <SanityButtons
                 buttonClassName="border-[#737373] text-[#737373] w-fit hover:bg-muted/50"
                 buttons={buttons}
@@ -102,21 +160,25 @@ export default function SplitFeatureSection({
                   cleanCTALayout === "row" && "flex flex-row gap-2 sm:flex-row"
                 )}
               />
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
 
-        <div
-          className="order-(--order-mobile) h-full md:order-(--order-desktop)"
+        <motion.div
+          className="order-(--order-mobile) h-full will-change-animate md:order-(--order-desktop)"
+          initial="hidden"
           style={
             {
               "--order-mobile": cleanMobileLayoutDirection === "column" ? 2 : 1,
               "--order-desktop": cleanDesktopLayoutDirection === "row" ? 2 : 1,
             } as React.CSSProperties
           }
+          variants={imageVariants}
+          viewport={{ once: true, amount: 0.3 }}
+          whileInView="visible"
         >
           <SplitFeatureSectionImage image={image} imageFill={cleanImageFill} />
-        </div>
+        </motion.div>
       </div>
     </section>
   );
