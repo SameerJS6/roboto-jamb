@@ -22,15 +22,15 @@
       "outputs": [".next/**", "!.next/cache/**", "dist/**", ".sanity/**"]
     },
     "//#format": {},
-    "//#lint": {
+    "//#check": {
       "cache": false
     },
-    "lint": {
-      "dependsOn": ["^lint"]
+    "check": {
+      "dependsOn": ["^check"]
     },
     "format": {},
-    "check-types": {
-      "dependsOn": ["^check-types"]
+    "typecheck": {
+      "dependsOn": ["^typecheck"]
     },
     "dev": {
       "cache": false,
