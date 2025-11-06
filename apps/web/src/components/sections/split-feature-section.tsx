@@ -1,17 +1,11 @@
 "use client";
 
 import { cn } from "@workspace/ui/lib/utils";
-import {
-  animate,
-  type MotionStyle,
-  motion,
-  useMotionTemplate,
-  useMotionValue,
-} from "motion/react";
+import { motion } from "motion/react";
 import { stegaClean } from "next-sanity";
 import { SanityButtons } from "@/components/elements/sanity-buttons";
 import { SanityImage } from "@/components/elements/sanity-image";
-import { staggerContainer, staggerItem } from "@/lib/motion-variants";
+import { fadeInUp, staggerContainer, staggerItem } from "@/lib/motion-variants";
 import type { PagebuilderType } from "@/types";
 import { convertToSlug } from "@/utils";
 
@@ -66,9 +60,6 @@ export default function SplitFeatureSection({
     headline,
     title
   );
-
-  const maskPosition = useMotionValue("150% 0%");
-  const mask = useMotionTemplate`linear-gradient(90deg, #000 25%, #000000e6 50%, #00000000) ${maskPosition} / 400% no-repeat`;
 
   return (
     <section
@@ -135,21 +126,16 @@ export default function SplitFeatureSection({
 
         <motion.div
           className="order-(--order-mobile) h-full will-change-animate md:order-(--order-desktop)"
-          onViewportEnter={() => {
-            const animation = animate(maskPosition, "0% 0%", {
-              duration: 1.5,
-              ease: "easeInOut",
-            });
-            return animation.stop;
-          }}
+          initial="hidden"
           style={
             {
               "--order-mobile": cleanMobileLayoutDirection === "column" ? 2 : 1,
               "--order-desktop": cleanDesktopLayoutDirection === "row" ? 2 : 1,
-              mask,
-            } as MotionStyle
+            } as React.CSSProperties
           }
+          variants={fadeInUp}
           viewport={{ once: true, amount: 0.3 }}
+          whileInView="visible"
         >
           <SplitFeatureSectionImage image={image} imageFill={cleanImageFill} />
         </motion.div>
