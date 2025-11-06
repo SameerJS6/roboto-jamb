@@ -13,6 +13,7 @@ type LogoProps = {
   width?: number;
   height?: number;
   priority?: boolean;
+  className?: string;
 };
 
 export function Logo({
@@ -22,9 +23,10 @@ export function Logo({
   width = 170,
   height = 40,
   priority = true,
+  className
 }: LogoProps) {
   return (
-    <Link className="" href="/">
+    <Link className={className} href="/">
       {image ? (
         <SanityImage
           alt={alt ?? "logo"}

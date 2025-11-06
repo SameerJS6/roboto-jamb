@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@workspace/ui/components/button";
+import { cn } from "@workspace/ui/lib/utils";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
@@ -52,16 +53,15 @@ export function Navbar({
   settingsData: QueryGlobalSeoSettingsResult;
 }) {
   const SCROLL_THRESHOLD = 200;
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentPosition = window.scrollY;
-      if (
-        currentPosition > SCROLL_THRESHOLD &&
-        currentPosition < scrollPosition
-      ) {
+      if (currentPosition < SCROLL_THRESHOLD) {
+        setIsVisible(true);
+      } else if (currentPosition < scrollPosition) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -107,16 +107,19 @@ export function Navbar({
       animate={{
         opacity: isVisible ? 1 : 0,
       }}
-      className="pointer-events-none sticky top-0 z-9999999 w-full"
+      className="sticky top-0 z-9999999 w-full"
       initial={{ opacity: 0 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >
-      <div className="container pointer-events-auto mx-auto px-4 py-6">
+      <div className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between">
           <div className="flex aspect-[2.4] w-[90px] items-center sm:w-[108px]">
             {logo && (
               <Logo
                 alt={siteTitle || ""}
+                className={cn(
+                  isVisible ? "pointer-events-auto" : "pointer-events-none"
+                )}
                 height={45}
                 image={logo}
                 priority
