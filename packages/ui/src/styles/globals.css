@@ -138,3 +138,7 @@
     display: none;
   }
 }
+
+@utility will-change-animate {
+  will-change: transform, opacity;
+}
