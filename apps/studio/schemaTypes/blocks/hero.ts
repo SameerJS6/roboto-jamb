@@ -1,6 +1,7 @@
 import { Sparkles } from "lucide-react";
 import { defineField, defineType } from "sanity";
 import { createRadioListLayout } from "../../utils/helper";
+import { spacingFields } from "../common";
 
 const imageFillOptions = ["contain", "cover"];
 
@@ -44,7 +45,8 @@ export const hero = defineType({
         direction: "horizontal",
       }),
       validation: (rule) => rule.required(),
-    })
+    }),
+    ...spacingFields("Vertical margin (top and bottom) for the hero section")
   ],
   preview: {
     select: {

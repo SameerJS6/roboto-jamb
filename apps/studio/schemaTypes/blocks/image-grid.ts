@@ -1,6 +1,7 @@
 import { Grid3x3 } from "lucide-react";
 import { defineField, defineType } from "sanity";
 import { createRadioListLayout } from "../../utils/helper";
+import { spacingFields } from "../common";
 
 const imageFillOptions = ["contain", "cover"];
 const MAX_DESCRIPTION_LENGHT = 500;
@@ -9,7 +10,7 @@ const MINIMUM_DESCRIPTION_LENGTH = 10;
 
 const backgroundColorOptions = [
   { title: "Transparent", value: "transparent" },
-  { title: "Muted", value: "#DFDAD7" },
+  { title: "Muted", value: "#E3E3E3" },
   { title: "Custom Color", value: "custom" },
 ];
 
@@ -34,7 +35,7 @@ export const imageGrid = defineType({
       title: "Background Color",
       description:
         "Choose a predefined background color or select 'Custom Color' to use your own. This affects the overall background of the image grid section.",
-      initialValue: "#DFDAD7",
+      initialValue: "#E3E3E3",
       options: createRadioListLayout(backgroundColorOptions, {
         direction: "horizontal",
       }),
@@ -148,6 +149,7 @@ export const imageGrid = defineType({
       validation: (rule) =>
         rule.min(MINIMUM_DESCRIPTION_LENGTH).max(MAX_DESCRIPTION_LENGHT).required(),
     }),
+    ...spacingFields("Vertical margin (top and bottom) for the image grid section"),
     defineField({
       name: "allowNavigation",
       type: "boolean",

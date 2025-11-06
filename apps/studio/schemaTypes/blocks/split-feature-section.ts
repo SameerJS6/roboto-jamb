@@ -1,7 +1,7 @@
 import { PanelBottom } from "lucide-react";
 import { defineField, defineType } from "sanity";
 import { createRadioListLayout } from "../../utils/helper";
-import { buttonsField } from "../common";
+import { buttonsField, spacingFields } from "../common";
 
 const desktopLayoutOptions = ["row", "row-reverse"];
 const mobileLayoutOptions = ["column", "column-reverse"];
@@ -16,6 +16,11 @@ const backgroundColorOptions = [
   { title: "Transparent", value: "transparent" },
   { title: "Muted", value: "#DFDAD7" },
   { title: "Custom Color", value: "custom" },
+];
+
+const paddingOptions = [
+  { title: "Default", value: "default" },
+  { title: "Large", value: "large" },
 ];
 
 export const splitFeatureSection = defineType({
@@ -151,6 +156,18 @@ export const splitFeatureSection = defineType({
         direction: "horizontal",
       }),
     }),
+    defineField({
+      name: "padding",
+      type: "string",
+      title: "Padding",
+      description: "Padding for the split feature section section",
+      initialValue: "default",
+      options: createRadioListLayout(paddingOptions, {
+        direction: "horizontal",
+      }),
+      validation: (rule) => rule.required(),
+    }),
+    ...spacingFields("Vertical margin (top and bottom) for the split feature section"),
     defineField({
       name: "allowNavigation",
       type: "boolean",
