@@ -3,15 +3,13 @@
 import { useOptimistic } from "@sanity/visual-editing/react";
 import { createDataAttribute } from "next-sanity";
 import { useCallback, useMemo } from "react";
-
+import Hero from "@/components/sections/hero";
+import ImageGrid from "@/components/sections/image-grid";
+import SplitFeatureSection from "@/components/sections/split-feature-section";
 import { dataset, projectId, studioUrl } from "@/config";
 import type { QueryHomePageDataResult } from "@/lib/sanity/sanity.types";
 import type { PageBuilderBlockTypes, PagebuilderType } from "@/types";
-import { JambHero } from "./jamb-hero";
-import JambImageGrid from "./jamb-image-grid";
-import { MainColumnLayoutComponent } from "./main-column";
 
-// More specific and descriptive type aliases
 export type PageBuilderBlock = NonNullable<
   NonNullable<QueryHomePageDataResult>["pageBuilder"]
 >[number];
@@ -28,18 +26,21 @@ type SanityDataAttributeConfig = {
   readonly path: string;
 };
 
-// Strongly typed component mapping with proper component signatures
+type BlockComponentsMap = {
+  hero: React.ComponentType<
+    PagebuilderType<"hero"> & { allBlocks: PageBuilderBlock[] }
+  >;
+} & {
+  [K in Exclude<PageBuilderBlockTypes, "hero">]: React.ComponentType<
+    PagebuilderType<K>
+  >;
+};
+
 const BLOCK_COMPONENTS = {
-  jambHero: JambHero as React.ComponentType<
-    PagebuilderType<"jambHero"> & { allBlocks: PageBuilderBlock[] }
-  >,
-  jambImageGrid: JambImageGrid as React.ComponentType<
-    PagebuilderType<"jambImageGrid">
-  >,
-  mainColumn: MainColumnLayoutComponent as React.ComponentType<
-    PagebuilderType<"mainColumn">
-  >,
-} as const satisfies Record<PageBuilderBlockTypes, React.ComponentType<any>>;
+  hero: Hero,
+  imageGrid: ImageGrid,
+  splitFeatureSection: SplitFeatureSection,
+} as const satisfies BlockComponentsMap;
 
 /**
  * Helper function to create consistent Sanity data attributes
@@ -89,6 +90,7 @@ function useOptimisticPageBuilder(
   initialBlocks: PageBuilderBlock[],
   documentId: string
 ) {
+  // biome-ignore lint/suspicious/noExplicitAny: <any is used to bypass type checking>
   return useOptimistic<PageBuilderBlock[], any>(
     initialBlocks,
     (currentBlocks, action) => {
@@ -133,13 +135,13 @@ function useBlockRenderer(
         );
       }
 
-      // Special handling for jambHero to pass allBlocks prop
-      if (block._type === "jambHero") {
+      if (block._type === "hero") {
         return (
           <div
             data-sanity={createBlockDataAttribute(block._key)}
             key={`${block._type}-${block._key}`}
           >
+            {/** biome-ignore lint/suspicious/noExplicitAny: <any is used to bypass type checking> */}
             <Component {...(block as any)} allBlocks={blocks} />
           </div>
         );
@@ -150,6 +152,7 @@ function useBlockRenderer(
           data-sanity={createBlockDataAttribute(block._key)}
           key={`${block._type}-${block._key}`}
         >
+          {/** biome-ignore lint/suspicious/noExplicitAny: <any is used to bypass type checking> */}
           <Component {...(block as any)} />
         </div>
       );

@@ -38,9 +38,8 @@ const buttonsFragment = /* groq */ `
 
 // Page builder block fragments
 
-
-const mainColumnBlock = /* groq */ `
-  _type == "mainColumn" => {
+const splitFeatureSectionBlock = /* groq */ `
+  _type == "splitFeatureSection" => {
     ...,
     customBackgroundColor,
     image {
@@ -57,8 +56,8 @@ const mainColumnBlock = /* groq */ `
   }
 `;
 
-const jambImageGridBlock = /* groq */ `
-  _type == "jambImageGrid" => {
+const imageGridBlock = /* groq */ `
+  _type == "imageGrid" => {
     ...,
     backgroundColor,
     customBackgroundColor,
@@ -76,8 +75,8 @@ const jambImageGridBlock = /* groq */ `
   }
 `;
 
-const jambHeroBlock = /* groq */ `
-  _type == "jambHero" => {
+const heroBlock = /* groq */ `
+  _type == "hero" => {
     ...,
     ${imageFragment},
   }
@@ -87,9 +86,9 @@ const pageBuilderFragment = /* groq */ `
   pageBuilder[]{
     ...,
     _type,
-    ${jambHeroBlock},
-    ${jambImageGridBlock},
-    ${mainColumnBlock}
+    ${heroBlock},
+    ${imageGridBlock},
+    ${splitFeatureSectionBlock}
   }
 `;
 
@@ -328,8 +327,7 @@ export const querySettingsData = defineQuery(`
     _type,
     siteTitle,
     siteDescription,
-    "logo": logo.asset->url + "?w=80&h=40&dpr=3&fit=max",
-    "socialLinks": socialLinks,
+    "logo": logo.asset->url + "?w=80&h=40&dpr=3&fit=max&q=100",
     "contactEmail": contactEmail,
   }
 `);

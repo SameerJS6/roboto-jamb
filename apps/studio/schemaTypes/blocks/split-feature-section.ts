@@ -18,12 +18,12 @@ const backgroundColorOptions = [
   { title: "Custom Color", value: "custom" },
 ];
 
-export const mainColumn = defineType({
-  name: "mainColumn",
+export const splitFeatureSection = defineType({
+  name: "splitFeatureSection",
   type: "object",
-  title: "Main Column",
+  title: "Split Feature Section",
   description:
-    "Main column configuration with layout - headline, title, description, image, and CTAs",
+    "Split feature section configuration with layout - headline, title, description, image, and CTAs",
   icon: PanelBottom,
   fields: [
     defineField({
@@ -38,7 +38,7 @@ export const mainColumn = defineType({
       type: "string",
       title: "Title",
       description:
-        "The main heading text for the main column section that captures attention",
+        "The main heading text for the split feature section section that captures attention",
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -46,7 +46,7 @@ export const mainColumn = defineType({
       type: "text",
       title: "Description",
       description:
-        "The descriptive text that provides more details about the main column content",
+        "The descriptive text that provides more details about the split feature section content",
       rows: 3,
       validation: (rule) => rule.required(),
     }),
@@ -55,7 +55,7 @@ export const mainColumn = defineType({
       type: "string",
       title: "Background Color",
       description:
-        "Choose a predefined background color or select 'Custom Color' to use your own. This affects the overall background of the main column section.",
+        "Choose a predefined background color or select 'Custom Color' to use your own. This affects the overall background of the split feature section section.",
       initialValue: "#DFDAD7",
       options: createRadioListLayout(backgroundColorOptions, {
         direction: "horizontal",
@@ -87,7 +87,7 @@ export const mainColumn = defineType({
       type: "image",
       title: "Image",
       description:
-        "The main image displayed in the main column section - should be high quality and visually impactful",
+        "The main image displayed in the split feature section section - should be high quality and visually impactful",
       options: {
         hotspot: true,
       },
@@ -205,8 +205,8 @@ export const mainColumn = defineType({
       headline: "headline",
     },
     prepare: ({ title, headline }) => ({
-      title: title || "Untitled Main Column",
-      subtitle: headline || "Main Column Block",
+      title: title || "Untitled Split Feature Section",
+      subtitle: headline || "Split Feature Section Block",
       media: PanelBottom,
     }),
   },

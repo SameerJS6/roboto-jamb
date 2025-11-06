@@ -1,9 +1,9 @@
-import { jambHero } from "./jamb-hero";
-import { jambImageGrid } from "./jamb-image-grid";
-import { mainColumn } from "./main-column";
+import { hero } from "./hero";
+import { imageGrid } from "./image-grid";
+import { splitFeatureSection } from "./split-feature-section";
 
 export const pageBuilderBlocks = [
-  jambHero,
-  jambImageGrid,
-  mainColumn,
+  hero,
+  imageGrid,
+  splitFeatureSection,
 ];

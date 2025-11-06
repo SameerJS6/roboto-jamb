@@ -13,10 +13,10 @@ const backgroundColorOptions = [
   { title: "Custom Color", value: "custom" },
 ];
 
-export const jambImageGrid = defineType({
-  name: "jambImageGrid",
+export const imageGrid = defineType({
+  name: "imageGrid",
   type: "object",
-  title: "Jamb Image Grid",
+  title: "Image Grid",
   description:
     "Image grid component with configurable layout - headline, title, subtitle, images, and CTAs",
   icon: Grid3x3,

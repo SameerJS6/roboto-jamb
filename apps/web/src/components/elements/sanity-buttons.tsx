@@ -25,12 +25,7 @@ function SanityButton({
   }
 
   return (
-    <Button
-      variant={variant}
-      {...props}
-      asChild
-      className={cn(className)}
-    >
+    <Button variant={variant} {...props} asChild className={cn(className)}>
       <Link
         aria-label={`Navigate to ${text}`}
         href={href || "#"}

@@ -2,20 +2,16 @@ import { buttonVariants } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
 import Link from "next/link";
 import { stegaClean } from "next-sanity";
+import { SanityImage } from "@/components/elements/sanity-image";
+import type { PageBuilderBlock } from "@/components/page-builder";
 import type { PagebuilderType } from "@/types";
 import { generateNavigationLinks } from "@/utils/navigation";
-import { SanityImage } from "./elements/sanity-image";
-import type { PageBuilderBlock } from "./page-builder";
 
-type InferredJambHeroProps = PagebuilderType<"jambHero"> & {
+type HeroProps = PagebuilderType<"hero"> & {
   allBlocks: PageBuilderBlock[];
 };
 
-export function JambHero({
-  image,
-  imageFill,
-  allBlocks,
-}: InferredJambHeroProps) {
+export default function Hero({ image, imageFill, allBlocks }: HeroProps) {
   const cleanImage = stegaClean(image);
   const cleanImageFill = stegaClean(imageFill);
   const navigationLinks = generateNavigationLinks(allBlocks);

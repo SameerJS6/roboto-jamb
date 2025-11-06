@@ -2,45 +2,21 @@
 
 import { cn } from "@workspace/ui/lib/utils";
 import { stegaClean } from "next-sanity";
+import { SanityButtons } from "@/components/elements/sanity-buttons";
+import { SanityImage } from "@/components/elements/sanity-image";
 import type { PagebuilderType } from "@/types";
 import { convertToSlug } from "@/utils";
-import { SanityButtons } from "./elements/sanity-buttons";
-import { SanityImage } from "./elements/sanity-image";
 
-type InferredMainColumnLayoutProps = PagebuilderType<"mainColumn">;
-
-function MainColumnImage({
-  image,
-  imageFill = "cover",
-}: {
-  image: InferredMainColumnLayoutProps["image"];
-  imageFill: InferredMainColumnLayoutProps["imageFill"];
-}) {
-  if (!image?.id) {
-    return null;
-  }
-
-  const className = cn(
-    "h-auto max-h-[731px] w-full",
-    imageFill === "contain" && "object-contain",
-    imageFill === "cover" && "object-cover"
-  );
-
-  return (
-    <SanityImage
-      alt={image.alt || ""}
-      className={className}
-      height={731}
-      image={image}
-      width={583}
-    />
-  );
-}
+type SplitFeatureSectionProps = PagebuilderType<"splitFeatureSection">;
+type SplitFeatureSectionImageProps = {
+  image: SplitFeatureSectionProps["image"];
+  imageFill: SplitFeatureSectionProps["imageFill"];
+};
 
 function getSlugSource(
-  navigationSlugField: InferredMainColumnLayoutProps["navigationSlugField"],
-  headline: InferredMainColumnLayoutProps["headline"],
-  title: InferredMainColumnLayoutProps["title"]
+  navigationSlugField: SplitFeatureSectionProps["navigationSlugField"],
+  headline: SplitFeatureSectionProps["headline"],
+  title: SplitFeatureSectionProps["title"]
 ): string {
   const cleanNavigationSlugField = stegaClean(navigationSlugField);
   const cleanHeadline = stegaClean(headline);
@@ -51,7 +27,7 @@ function getSlugSource(
     : cleanTitle;
 }
 
-export function MainColumnLayoutComponent({
+export default function SplitFeatureSection({
   headline,
   title,
   description,
@@ -64,7 +40,7 @@ export function MainColumnLayoutComponent({
   buttons,
   ctaLayout = "row",
   navigationSlugField,
-}: InferredMainColumnLayoutProps) {
+}: SplitFeatureSectionProps) {
   const cleanBackgroundColor = stegaClean(backgroundColor);
   const cleanDesktopLayoutDirection = stegaClean(desktopLayoutDirection);
   const cleanMobileLayoutDirection = stegaClean(mobileLayoutDirection);
@@ -144,9 +120,34 @@ export function MainColumnLayoutComponent({
             } as React.CSSProperties
           }
         >
-          <MainColumnImage image={image} imageFill={cleanImageFill} />
+          <SplitFeatureSectionImage image={image} imageFill={cleanImageFill} />
         </div>
       </div>
     </section>
+  );
+}
+
+function SplitFeatureSectionImage({
+  image,
+  imageFill = "cover",
+}: SplitFeatureSectionImageProps) {
+  if (!image?.id) {
+    return null;
+  }
+
+  const className = cn(
+    "h-auto max-h-[731px] w-full",
+    imageFill === "contain" && "object-contain",
+    imageFill === "cover" && "object-cover"
+  );
+
+  return (
+    <SanityImage
+      alt={image.alt || ""}
+      className={className}
+      height={731}
+      image={image}
+      width={583}
+    />
   );
 }

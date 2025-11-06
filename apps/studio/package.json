@@ -9,12 +9,12 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "lint": "npx ultracite check",
-    "format": "npx ultracite fix",
+    "check": "npx ultracite check",
+    "fix": "npx ultracite fix",
+    "format": "npx ultracite format",
     "deploy-graphql": "sanity graphql deploy",
     "extract": "sanity schema extract --enforce-required-fields",
-    "check-types": "tsc --noEmit",
-    "check": "npm run lint && npm run check-types",
+    "typecheck": "tsc --noEmit",
     "type": "sanity schema extract --enforce-required-fields && sanity typegen generate",
     "postinstall": "sanity exec scripts/cli-alert-for-data.ts"
   },
@@ -42,7 +42,7 @@
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
-    "@sanity/blueprints": "0.3.0",
+    "@sanity/blueprints": "0.4.1",
     "@types/react": "^19.2.2"
   }
 }

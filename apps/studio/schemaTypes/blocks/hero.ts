@@ -4,9 +4,9 @@ import { createRadioListLayout } from "../../utils/helper";
 
 const imageFillOptions = ["contain", "cover"];
 
-export const jambHero = defineType({
-  name: "jambHero",
-  title: "Jamb Hero",
+export const hero = defineType({
+  name: "hero",
+  title: "Hero",
   icon: Sparkles,
   type: "object",
   description:
@@ -51,7 +51,7 @@ export const jambHero = defineType({
       image: "image",
     },
     prepare: ({ image }) => ({
-      title: "Jamb Hero",
+      title: "Hero",
       subtitle: "Hero with auto-generated navigation",
       media: image,
     }),

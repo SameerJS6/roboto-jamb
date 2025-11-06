@@ -4,81 +4,27 @@ import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
 import { stegaClean } from "next-sanity";
 import { useState } from "react";
+import { SanityImage } from "@/components/elements/sanity-image";
 import type { PagebuilderType } from "@/types";
 import { convertToSlug } from "@/utils";
-import { SanityImage } from "./elements/sanity-image";
 
-type InferredJambImageGridProps = PagebuilderType<"jambImageGrid">;
+type ImageGridProps = PagebuilderType<"imageGrid">;
+type DescriptionWithReadMoreProps = {
+  description: ImageGridProps["features"][0]["description"];
+  maxLength: ImageGridProps["maxDescriptionLength"];
+};
+type FeatureImageProps = {
+  image: ImageGridProps["features"][0]["image"];
+  imageFill: ImageGridProps["features"][0]["imageFill"];
+};
 
-function DescriptionWithReadMore({
-  description,
-  maxLength,
-}: {
-  description: InferredJambImageGridProps["features"][0]["description"];
-  maxLength: InferredJambImageGridProps["maxDescriptionLength"];
-}) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const cleanDescription = stegaClean(description);
-
-  if (cleanDescription && cleanDescription.length <= maxLength) {
-    return (
-      <p className="flex-1 text-base leading-[25px]">{cleanDescription}</p>
-    );
-  }
-
-  const truncatedText = cleanDescription?.slice(0, maxLength).trim();
-  const displayText = isExpanded ? cleanDescription : `${truncatedText}...`;
-
-  return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-1">
-      <p className="flex-1 text-base leading-[25px]">{displayText}</p>
-      <Button
-        className="underline underline-offset-4"
-        onClick={() => setIsExpanded(!isExpanded)}
-        size="sm"
-        variant="ghost"
-      >
-        {isExpanded ? "Read less" : "Read more"}
-      </Button>
-    </div>
-  );
-}
-
-function FeatureImage({
-  image,
-  imageFill,
-}: {
-  image: InferredJambImageGridProps["features"][0]["image"];
-  imageFill: InferredJambImageGridProps["features"][0]["imageFill"];
-}) {
-  const cleanImageFill = stegaClean(imageFill);
-
-  if (!image?.id) {
-    return null;
-  }
-
-  return (
-    <SanityImage
-      alt={image.alt || ""}
-      className={cn(
-        "aspect-square w-full",
-        cleanImageFill === "contain" && "object-contain",
-        cleanImageFill === "cover" && "object-cover"
-      )}
-      height={300}
-      image={image}
-      width={300}
-    />
-  );
-}
-
-export default function JambImageGrid({
+export default function ImageGrid({
   title,
   backgroundColor = "#DFDAD7",
   customBackgroundColor,
   features,
   maxDescriptionLength,
-}: InferredJambImageGridProps) {
+}: ImageGridProps) {
   const cleanBackgroundColor = stegaClean(backgroundColor);
   const cleanTitle = stegaClean(title);
 
@@ -135,5 +81,58 @@ export default function JambImageGrid({
         </div>
       </div>
     </section>
+  );
+}
+
+function DescriptionWithReadMore({
+  description,
+  maxLength,
+}: DescriptionWithReadMoreProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const cleanDescription = stegaClean(description);
+
+  if (cleanDescription && cleanDescription.length <= maxLength) {
+    return (
+      <p className="flex-1 text-base leading-[25px]">{cleanDescription}</p>
+    );
+  }
+
+  const truncatedText = cleanDescription?.slice(0, maxLength).trim();
+  const displayText = isExpanded ? cleanDescription : `${truncatedText}...`;
+
+  return (
+    <div className="flex flex-1 flex-col items-center justify-center gap-1">
+      <p className="flex-1 text-base leading-[25px]">{displayText}</p>
+      <Button
+        className="underline underline-offset-4"
+        onClick={() => setIsExpanded(!isExpanded)}
+        size="sm"
+        variant="ghost"
+      >
+        {isExpanded ? "Read less" : "Read more"}
+      </Button>
+    </div>
+  );
+}
+
+function FeatureImage({ image, imageFill }: FeatureImageProps) {
+  const cleanImageFill = stegaClean(imageFill);
+
+  if (!image?.id) {
+    return null;
+  }
+
+  return (
+    <SanityImage
+      alt={image.alt || ""}
+      className={cn(
+        "aspect-square w-full",
+        cleanImageFill === "contain" && "object-contain",
+        cleanImageFill === "cover" && "object-cover"
+      )}
+      height={300}
+      image={image}
+      width={300}
+    />
   );
 }

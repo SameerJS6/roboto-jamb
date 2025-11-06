@@ -7,10 +7,10 @@ export type NavigationLink = {
   href: string;
 };
 
-function getMainColumnNavigationLink(
+function getSplitFeatureSectionNavigationLink(
   block: PageBuilderBlock
 ): NavigationLink | null {
-  if (block._type !== "mainColumn") {
+  if (block._type !== "splitFeatureSection") {
     return null;
   }
 
@@ -40,10 +40,10 @@ function getMainColumnNavigationLink(
   };
 }
 
-function getJambImageGridNavigationLink(
+function getImageGridNavigationLink(
   block: PageBuilderBlock
 ): NavigationLink | null {
-  if (block._type !== "jambImageGrid" || !("title" in block) || !block.title) {
+  if (block._type !== "imageGrid" || !("title" in block) || !block.title) {
     return null;
   }
 
@@ -66,16 +66,16 @@ export function generateNavigationLinks(
 
   for (const block of blocks) {
     if (
-      (block._type === "mainColumn" || block._type === "jambImageGrid") &&
+      (block._type === "splitFeatureSection" || block._type === "imageGrid") &&
       "allowNavigation" in block &&
       block.allowNavigation === true
     ) {
       let link: NavigationLink | null = null;
 
-      if (block._type === "mainColumn") {
-        link = getMainColumnNavigationLink(block);
-      } else if (block._type === "jambImageGrid") {
-        link = getJambImageGridNavigationLink(block);
+      if (block._type === "splitFeatureSection") {
+        link = getSplitFeatureSectionNavigationLink(block);
+      } else if (block._type === "imageGrid") {
+        link = getImageGridNavigationLink(block);
       }
 
       if (link) {

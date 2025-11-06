@@ -1,6 +1,6 @@
 [
   {
-    "name": "mainColumn",
+    "name": "splitFeatureSection",
     "type": "type",
     "value": {
       "type": "object",
@@ -9,7 +9,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "string",
-            "value": "mainColumn"
+            "value": "splitFeatureSection"
           }
         },
         "headline": {
@@ -255,7 +255,7 @@
     }
   },
   {
-    "name": "jambImageGrid",
+    "name": "imageGrid",
     "type": "type",
     "value": {
       "type": "object",
@@ -264,7 +264,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "string",
-            "value": "jambImageGrid"
+            "value": "imageGrid"
           }
         },
         "title": {
@@ -464,7 +464,7 @@
     }
   },
   {
-    "name": "jambHero",
+    "name": "hero",
     "type": "type",
     "value": {
       "type": "object",
@@ -473,7 +473,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "string",
-            "value": "jambHero"
+            "value": "hero"
           }
         },
         "image": {
@@ -592,7 +592,7 @@
             },
             "rest": {
               "type": "inline",
-              "name": "jambHero"
+              "name": "hero"
             }
           },
           {
@@ -607,7 +607,7 @@
             },
             "rest": {
               "type": "inline",
-              "name": "jambImageGrid"
+              "name": "imageGrid"
             }
           },
           {
@@ -622,7 +622,7 @@
             },
             "rest": {
               "type": "inline",
-              "name": "mainColumn"
+              "name": "splitFeatureSection"
             }
           }
         ]
@@ -1833,50 +1833,6 @@
         "type": "objectAttribute",
         "value": {
           "type": "string"
-        },
-        "optional": true
-      },
-      "socialLinks": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "object",
-          "attributes": {
-            "linkedin": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "facebook": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "twitter": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "instagram": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "youtube": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            }
-          }
         },
         "optional": true
       }

@@ -2,8 +2,8 @@
 
 import { Button } from "@workspace/ui/components/button";
 import useSWR from "swr";
+import { Logo } from "@/components/logo";
 import type { QueryGlobalSeoSettingsResult } from "@/lib/sanity/sanity.types";
-import { Logo } from "./logo";
 
 type NavigationData = {
   navbarData: null;
