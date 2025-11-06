@@ -1,6 +1,6 @@
 export default function FooterSkeleton() {
   return (
-    <footer className="bg-[#E3E3E3]">
+    <footer className="bg-muted">
       <div className="container mx-auto px-6 py-12">
         {/* Top Section Skeleton */}
         <div className="grid grid-cols-1 gap-8 pb-12 md:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_auto]">

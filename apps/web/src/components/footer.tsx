@@ -16,7 +16,7 @@ export async function Footer() {
   }
 
   return (
-    <footer className="bg-[#E3E3E3]">
+    <footer className="mt-56 bg-muted">
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 gap-8 pb-12 md:grid-cols-2 lg:grid-cols-3">
           <div className="space-y-1 text-muted-foreground text-sm">
