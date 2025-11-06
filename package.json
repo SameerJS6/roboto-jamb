@@ -5,9 +5,10 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "npx ultracite check",
-    "format": "npx ultracite fix",
-    "check-types": "turbo check-types"
+    "check": "npx ultracite check",
+    "fix": "npx ultracite fix",
+    "format": "npx ultracite format",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.5",
