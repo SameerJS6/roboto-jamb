@@ -87,9 +87,7 @@ export default function SplitFeatureSection({
       }}
     >
       <div
-        className={cn(
-          "container mx-auto grid gap-10 px-4 sm:gap-12 md:grid-cols-2 md:gap-14 lg:gap-16"
-        )}
+        className="container mx-auto grid gap-10 px-4 sm:gap-12 md:grid-cols-2 md:gap-14 lg:gap-16"
         style={{ "--max-w": "1336px" } as React.CSSProperties}
       >
         <motion.div
@@ -114,7 +112,7 @@ export default function SplitFeatureSection({
             </motion.p>
           )}
           <motion.h2
-            className="min-w-0 text-balance break-words text-center font-medium text-3xl leading-[48px] will-change-animate sm:text-2xl lg:text-4xl"
+            className="mx-auto min-w-0 max-w-[22ch] text-balance break-words text-center font-medium text-3xl leading-[48px] will-change-animate sm:text-2xl lg:text-4xl"
             variants={staggerItem}
           >
             {title}
