@@ -135,7 +135,6 @@ function useBlockRenderer(
         );
       }
 
-      // Special handling for jambHero to pass allBlocks prop
       if (block._type === "hero") {
         return (
           <div
