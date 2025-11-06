@@ -10,11 +10,9 @@ export async function POST(request: NextRequest) {
   );
   console.log("Headers:", Object.fromEntries(request.headers));
 
-  const secret = request.nextUrl.searchParams.get("secret");
-  const secret2 = request.headers.get("x-sanity-webhook-secret");
+  const secret = request.headers.get("x-sanity-webhook-secret");
 
   console.log("secret", secret);
-  console.log("secret2", secret2);
 
   console.log("Received secret:", secret);
   console.log("Expected secret:", process.env.SANITY_REVALIDATE_SECRET);
