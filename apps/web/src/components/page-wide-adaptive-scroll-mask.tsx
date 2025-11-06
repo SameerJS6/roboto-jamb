@@ -52,7 +52,6 @@ export default function PageWideScrollMask() {
           y: -MASK_TRANSLATE,
         }}
         style={{
-          pointerEvents: "none",
           background:
             "linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background) / 0.95) 15%, hsl(var(--background) / 0.8) 30%, hsl(var(--background) / 0.5) 50%, hsl(var(--background) / 0.2) 70%, transparent 100%)",
           backdropFilter: "blur(8px)",
@@ -79,7 +78,6 @@ export default function PageWideScrollMask() {
           y: MASK_TRANSLATE,
         }}
         style={{
-          pointerEvents: "none",
           background:
             "linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.95) 15%, hsl(var(--background) / 0.8) 30%, hsl(var(--background) / 0.5) 50%, hsl(var(--background) / 0.2) 70%, transparent 100%)",
           backdropFilter: "blur(8px)",
