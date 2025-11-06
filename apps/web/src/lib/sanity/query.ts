@@ -164,8 +164,8 @@ export const queryGenericPageOGData = defineQuery(`
   }
 `);
 
-export const queryJambFooterData = defineQuery(`
-  *[_type == "jambFooter" && _id == "jambFooter"][0]{
+export const queryFooterData = defineQuery(`
+  *[_type == "footer" && _id == "footer"][0]{
     _id,
     _type,
     _createdAt,
@@ -215,49 +215,6 @@ export const queryJambFooterData = defineQuery(`
   }
 `);
 
-export const queryFooterData = defineQuery(`
-  *[_type == "footer" && _id == "footer"][0]{
-    _id,
-    subtitle,
-    columns[]{
-      _key,
-      title,
-      links[]{
-        _key,
-        name,
-        "openInNewTab": url.openInNewTab,
-        "href": select(
-          url.type == "internal" => url.internal->slug.current,
-          url.type == "external" => url.external,
-          url.href
-        ),
-      }
-    }
-  }
-`);
-
-// export const queryMainColumnData = defineQuery(`
-//   *[_type == "mainColumn" && _id == "mainColumn"][0]{
-//     _id,
-//     _type,
-//     _createdAt,
-//     _updatedAt,
-//     label,
-//     headline,
-//     title,
-//     description,
-//     backgroundColor,
-//     image {
-//       ${imageFields},
-//       alt
-//     },
-//     imageFill,
-//     desktopLayoutDirection,
-//     mobileLayoutDirection,
-//     ctaLayout,
-//     ${buttonsFragment}
-//   }
-// `);
 
 export const queryNavbarData = defineQuery(`
   *[_type == "navbar" && _id == "navbar"][0]{
@@ -311,14 +268,7 @@ export const queryGlobalSeoSettings = defineQuery(`
       ${imageFields}
     },
     siteDescription,
-    socialLinks{
-      linkedin,
-      facebook,
-      twitter,
-      instagram,
-      youtube
-    }
-  }
+      }
 `);
 
 export const querySettingsData = defineQuery(`

@@ -1,11 +1,14 @@
 "use client";
 
 import { cn } from "@workspace/ui/lib/utils";
+import { motion } from "motion/react";
 import { stegaClean } from "next-sanity";
 import { SanityButtons } from "@/components/elements/sanity-buttons";
 import { SanityImage } from "@/components/elements/sanity-image";
+import { fadeInUp, staggerContainer, staggerItem } from "@/lib/motion-variants";
 import type { PagebuilderType } from "@/types";
 import { convertToSlug } from "@/utils";
+import { getSpacingStyles } from "@/utils/spacing";
 
 type SplitFeatureSectionProps = PagebuilderType<"splitFeatureSection">;
 type SplitFeatureSectionImageProps = {
@@ -39,6 +42,11 @@ export default function SplitFeatureSection({
   mobileLayoutDirection = "column",
   buttons,
   ctaLayout = "row",
+  spacingMode,
+  spacing,
+  padding,
+  topSpacing,
+  bottomSpacing,
   navigationSlugField,
 }: SplitFeatureSectionProps) {
   const cleanBackgroundColor = stegaClean(backgroundColor);
@@ -47,6 +55,11 @@ export default function SplitFeatureSection({
 
   const cleanCTALayout = stegaClean(ctaLayout);
   const cleanImageFill = stegaClean(imageFill);
+  const cleanSpacingMode = stegaClean(spacingMode);
+  const cleanSpacing = stegaClean(spacing);
+  const cleanTopSpacing = stegaClean(topSpacing);
+  const cleanBottomSpacing = stegaClean(bottomSpacing);
+  const cleanPadding = stegaClean(padding);
 
   const actualBackgroundColor =
     cleanBackgroundColor === "custom" && customBackgroundColor
@@ -61,67 +74,88 @@ export default function SplitFeatureSection({
 
   return (
     <section
-      className="scroll-my-20 py-9"
+      className={cn("scroll-my-20 py-9", cleanPadding === "large" && "py-32")}
       {...(slugSource && { id: convertToSlug(slugSource) })}
-      style={{ backgroundColor: actualBackgroundColor }}
+      style={{
+        backgroundColor: actualBackgroundColor,
+        ...getSpacingStyles({
+          spacingMode: cleanSpacingMode,
+          spacing: cleanSpacing,
+          topSpacing: cleanTopSpacing,
+          bottomSpacing: cleanBottomSpacing,
+        }),
+      }}
     >
       <div
-        className={cn(
-          "container mx-auto grid gap-10 px-4 sm:gap-12 md:grid-cols-2 md:gap-14 lg:gap-16"
-        )}
+        className="container mx-auto grid gap-10 px-4 sm:gap-12 md:grid-cols-2 md:gap-14 lg:gap-16"
         style={{ "--max-w": "1336px" } as React.CSSProperties}
       >
-        <div
-          className="order-(--order-mobile) flex min-w-0 flex-col justify-center gap-4 sm:gap-5 md:order-(--order-desktop)"
+        <motion.div
+          className="order-(--order-mobile) flex min-w-0 flex-col justify-center gap-4 will-change-animate sm:gap-5 md:order-(--order-desktop)"
+          initial="hidden"
           style={
             {
               "--order-mobile": cleanMobileLayoutDirection === "column" ? 1 : 2,
               "--order-desktop": cleanDesktopLayoutDirection === "row" ? 1 : 2,
             } as React.CSSProperties
           }
+          variants={staggerContainer}
+          viewport={{ once: true, amount: 0.3 }}
+          whileInView="visible"
         >
           {headline && (
-            <p className="min-w-0 break-words text-center font-medium text-sm uppercase leading-[25px] lg:text-base">
+            <motion.p
+              className="min-w-0 break-words text-center font-medium text-sm uppercase leading-[25px] will-change-animate lg:text-base"
+              variants={staggerItem}
+            >
               {headline}
-            </p>
+            </motion.p>
           )}
-          <h2 className="min-w-0 text-balance break-words text-center font-medium text-3xl leading-[48px] sm:text-2xl lg:text-4xl">
+          <motion.h2
+            className="mx-auto min-w-0 max-w-[22ch] text-balance break-words text-center font-medium text-3xl leading-[48px] will-change-animate sm:text-2xl lg:text-4xl"
+            variants={staggerItem}
+          >
             {title}
-          </h2>
-          <p className="mx-auto min-w-0 max-w-[47ch] break-words font-medium text-sm leading-[25px] lg:text-base">
+          </motion.h2>
+          <motion.p
+            className="mx-auto min-w-0 max-w-[47ch] break-words font-medium text-sm leading-[25px] will-change-animate lg:text-base"
+            variants={staggerItem}
+          >
             {description}
-          </p>
+          </motion.p>
           {buttons && buttons.length > 0 && (
-            <div
-              className={cn(
-                "mx-auto mt-3 flex w-fit gap-2",
-                cleanCTALayout === "column" && "flex-col",
-                cleanCTALayout === "row" && "flex-row"
-              )}
+            <motion.div
+              className="mx-auto mt-3 flex w-fit gap-2 will-change-animate"
+              variants={staggerItem}
             >
               <SanityButtons
-                buttonClassName="border-[#737373] text-[#737373] hover:bg-muted/50"
+                buttonClassName="border-[#737373]  text-[#737373] w-fit hover:bg-muted/50"
                 buttons={buttons}
                 className={cn(
-                  cleanCTALayout === "column" && "flex flex-col gap-2",
-                  cleanCTALayout === "row" && "flex flex-row gap-2"
+                  cleanCTALayout === "column" &&
+                    "flex flex-col items-center justify-center gap-2 sm:flex-col",
+                  cleanCTALayout === "row" && "flex flex-row gap-2 sm:flex-row"
                 )}
               />
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
 
-        <div
-          className="order-(--order-mobile) h-full md:order-(--order-desktop)"
+        <motion.div
+          className="order-(--order-mobile) h-full will-change-animate md:order-(--order-desktop)"
+          initial="hidden"
           style={
             {
               "--order-mobile": cleanMobileLayoutDirection === "column" ? 2 : 1,
               "--order-desktop": cleanDesktopLayoutDirection === "row" ? 2 : 1,
             } as React.CSSProperties
           }
+          variants={fadeInUp}
+          viewport={{ once: true, amount: 0.3 }}
+          whileInView="visible"
         >
           <SplitFeatureSectionImage image={image} imageFill={cleanImageFill} />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

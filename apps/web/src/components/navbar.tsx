@@ -1,6 +1,9 @@
 "use client";
 
 import { Button } from "@workspace/ui/components/button";
+import { cn } from "@workspace/ui/lib/utils";
+import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { Logo } from "@/components/logo";
 import type { QueryGlobalSeoSettingsResult } from "@/lib/sanity/sanity.types";
@@ -20,7 +23,11 @@ const fetcher = async (url: string): Promise<NavigationData> => {
 
 function NavbarSkeleton() {
   return (
-    <header className="sticky top-0 z-40 w-full">
+    <motion.header
+      animate={{ opacity: 1 }}
+      className="sticky top-0 z-40 w-full"
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+    >
       <div className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between">
           <div className="flex aspect-[2.4] w-[90px] items-center sm:w-[108px]">
@@ -34,7 +41,7 @@ function NavbarSkeleton() {
           </div>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }
 
@@ -45,6 +52,28 @@ export function Navbar({
   navbarData: null;
   settingsData: QueryGlobalSeoSettingsResult;
 }) {
+  const SCROLL_THRESHOLD = 200;
+  const [isVisible, setIsVisible] = useState(true);
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentPosition = window.scrollY;
+      if (currentPosition < SCROLL_THRESHOLD) {
+        setIsVisible(true);
+      } else if (currentPosition < scrollPosition) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+
+      setScrollPosition(currentPosition);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [scrollPosition]);
+
   const { data, error, isLoading } = useSWR<NavigationData>(
     "/api/navigation",
     fetcher,
@@ -74,13 +103,23 @@ export function Navbar({
   }
 
   return (
-    <header className="sticky top-0 z-40 w-full">
+    <motion.header
+      animate={{
+        opacity: isVisible ? 1 : 0,
+      }}
+      className="sticky top-0 z-9999999 w-full"
+      initial={{ opacity: 0 }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+    >
       <div className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between">
           <div className="flex aspect-[2.4] w-[90px] items-center sm:w-[108px]">
             {logo && (
               <Logo
                 alt={siteTitle || ""}
+                className={cn(
+                  isVisible ? "pointer-events-auto" : "pointer-events-none"
+                )}
                 height={45}
                 image={logo}
                 priority
@@ -97,6 +136,7 @@ export function Navbar({
                 fill="none"
                 height="27"
                 role="img"
+                style={{ mixBlendMode: "exclusion" }}
                 viewBox="0 0 25 27"
                 width="25"
                 xmlns="http://www.w3.org/2000/svg"
@@ -126,6 +166,7 @@ export function Navbar({
                 fill="none"
                 height="23"
                 role="img"
+                style={{ mixBlendMode: "exclusion" }}
                 viewBox="0 0 33 23"
                 width="33"
                 xmlns="http://www.w3.org/2000/svg"
@@ -153,6 +194,7 @@ export function Navbar({
                 fill="none"
                 height="23"
                 role="img"
+                style={{ mixBlendMode: "exclusion" }}
                 viewBox="0 0 32 23"
                 width="32"
                 xmlns="http://www.w3.org/2000/svg"
@@ -192,6 +234,6 @@ export function Navbar({
           Navigation data fetch error: {error.message}
         </div>
       )}
-    </header>
+    </motion.header>
   );
 }
