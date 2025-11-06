@@ -20,15 +20,15 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "invalid-url-that-will-fail.com"
+        hostname: "invalid-url-that-will-fail.com",
       },
       {
         protocol: "https",
-        hostname: "another-invalid-url.com"
+        hostname: "another-invalid-url.com",
       },
       {
         protocol: "https",
-        hostname: "placehold.co"
+        hostname: "placehold.co",
       },
       {
         protocol: "https",

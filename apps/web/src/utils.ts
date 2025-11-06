@@ -84,5 +84,7 @@ export function cleanStringValue<T extends string>(
   if (!value) {
     return defaultValue;
   }
-  return value.trim().replace(/[\u200B-\u200D\uFEFF]/g, "") as T || defaultValue;
-};
+  return (
+    (value.trim().replace(/[\u200B-\u200D\uFEFF]/g, "") as T) || defaultValue
+  );
+}

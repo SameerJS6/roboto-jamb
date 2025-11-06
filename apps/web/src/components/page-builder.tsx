@@ -27,14 +27,18 @@ type SanityDataAttributeConfig = {
 };
 
 type BlockComponentsMap = {
-  hero: React.ComponentType<PagebuilderType<"hero"> & { allBlocks: PageBuilderBlock[] }>;
+  hero: React.ComponentType<
+    PagebuilderType<"hero"> & { allBlocks: PageBuilderBlock[] }
+  >;
 } & {
-  [K in Exclude<PageBuilderBlockTypes, "hero">]: React.ComponentType<PagebuilderType<K>>
+  [K in Exclude<PageBuilderBlockTypes, "hero">]: React.ComponentType<
+    PagebuilderType<K>
+  >;
 };
 
 const BLOCK_COMPONENTS = {
   hero: Hero,
-  imageGrid: ImageGrid ,
+  imageGrid: ImageGrid,
   splitFeatureSection: SplitFeatureSection,
 } as const satisfies BlockComponentsMap;
 

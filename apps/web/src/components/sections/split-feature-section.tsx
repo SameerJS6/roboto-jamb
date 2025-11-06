@@ -13,7 +13,6 @@ type SplitFeatureSectionImageProps = {
   imageFill: SplitFeatureSectionProps["imageFill"];
 };
 
-
 function getSlugSource(
   navigationSlugField: SplitFeatureSectionProps["navigationSlugField"],
   headline: SplitFeatureSectionProps["headline"],

@@ -18,7 +18,6 @@ type FeatureImageProps = {
   imageFill: ImageGridProps["features"][0]["imageFill"];
 };
 
-
 export default function ImageGrid({
   title,
   backgroundColor = "#DFDAD7",

@@ -38,7 +38,6 @@ const buttonsFragment = /* groq */ `
 
 // Page builder block fragments
 
-
 const splitFeatureSectionBlock = /* groq */ `
   _type == "splitFeatureSection" => {
     ...,
