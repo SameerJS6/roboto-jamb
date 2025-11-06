@@ -6,7 +6,10 @@ import { useTouchPrimary } from "../hoooks/use-touch-detection";
 
 export default dynamic(() => Promise.resolve(Scrollbar), { ssr: false });
 
-const padding = 8;
+const SCROLLBAR_PADDING = 8;
+const MOBILE_BREAKPOINT = 996;
+const SCROLLBAR_HIDE_DELAY = 1000;
+const PERCENTAGE_MULTIPLIER = 100;  
 
 function Scrollbar() {
   const isTouchPrimary = useTouchPrimary();
@@ -27,7 +30,6 @@ function Scrollbar() {
     }
 
     const thumbElement = container.children[0] as HTMLDivElement;
-
     let thumbHeight = 0;
 
     const updateBounds = () => {
@@ -35,12 +37,12 @@ function Scrollbar() {
       thumbHeight = window.innerHeight / document.body.scrollHeight;
 
       const scrollPosition =
-        padding +
+        SCROLLBAR_PADDING +
         (window.scrollY / maxScrollY) *
-          (window.innerHeight - thumbHeight * window.innerHeight - padding * 2);
+          (window.innerHeight - thumbHeight * window.innerHeight - SCROLLBAR_PADDING * 2);
 
       Object.assign(thumbElement.style, {
-        height: `${thumbHeight * 100}%`,
+        height: `${thumbHeight * PERCENTAGE_MULTIPLIER}%`,
         transform: `translateY(${scrollPosition}px)`,
       });
     };
@@ -68,7 +70,7 @@ function Scrollbar() {
     let scrollbarHideTimeout = 0;
 
     const showScrollbar = () => {
-      if (thumbHeight === 1 || window.innerWidth < 996) {
+      if (thumbHeight === 1 || window.innerWidth < MOBILE_BREAKPOINT) {
         return;
       }
 
@@ -76,7 +78,7 @@ function Scrollbar() {
       thumbElement.classList.remove("opacity-0");
       scrollbarHideTimeout = window.setTimeout(() => {
         thumbElement.classList.add("opacity-0");
-      }, 1000);
+      }, SCROLLBAR_HIDE_DELAY);
     };
 
     const onMouseUp = () => {
