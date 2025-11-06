@@ -92,13 +92,7 @@ export default function SplitFeatureSection({
             {description}
           </p>
           {buttons && buttons.length > 0 && (
-            <div
-              className={cn(
-                "mx-auto mt-3 flex w-fit gap-2",
-                cleanCTALayout === "column" && "flex-col",
-                cleanCTALayout === "row" && "flex-row"
-              )}
-            >
+            <div className="mx-auto mt-3 flex w-fit gap-2">
               <SanityButtons
                 buttonClassName="border-[#737373] text-[#737373] w-fit hover:bg-muted/50"
                 buttons={buttons}
