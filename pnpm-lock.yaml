@@ -82,8 +82,8 @@ importers:
         version: 6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
     devDependencies:
       '@sanity/blueprints':
-        specifier: 0.3.0
-        version: 0.3.0
+        specifier: 0.4.1
+        version: 0.4.1
       '@types/react':
         specifier: ^19.2.2
         version: 19.2.2
@@ -2351,8 +2351,8 @@ packages:
     resolution: {integrity: sha512-oOyUNgIGkYbQcSBa/UniwYQoqf/DLpM9OGqGq8xfn6SY1ksnEtfjt/QaeeAn9Rl1BEUGQKSCat92Nhfu0VDSnA==}
     engines: {node: '>=20.19 <22 || >=22.12'}
 
-  '@sanity/blueprints@0.3.0':
-    resolution: {integrity: sha512-K3y0oO4GJ41HH+0HqGgqHdgBTAUxuRbeCtZe6jYlVwVAbBHTMLKw+0ugnYuNAVjBswQKB7zlcGxvIkWmG7h7EA==}
+  '@sanity/blueprints@0.4.1':
+    resolution: {integrity: sha512-6g4KxUJUgTLaZXR3n6UsmY5kGSeEtkaEsFZzoa+gYtl/5Etm+2tCdfkv3UkQKPRxVLBOsTMegi+/yNXvqDwNUg==}
     engines: {node: '>=20'}
 
   '@sanity/cli@4.12.0':
@@ -9091,7 +9091,7 @@ snapshots:
 
   '@sanity/blueprints-parser@0.2.1': {}
 
-  '@sanity/blueprints@0.3.0': {}
+  '@sanity/blueprints@0.4.1': {}
 
   '@sanity/cli@4.12.0(@types/node@24.9.2)(babel-plugin-react-compiler@19.1.0-rc.2)(lightningcss@1.30.1)(react@19.2.0)(terser@5.37.0)(typescript@5.9.2)(yaml@2.6.1)':
     dependencies:
