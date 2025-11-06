@@ -1,4 +1,5 @@
 import "@workspace/ui/globals.css";
+import { META_THEME_COLORS } from "@workspace/ui/hooks/use-meta-color";
 import localFont from "next/font/local";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
@@ -41,35 +42,30 @@ export default async function RootLayout({
   const nav = await getNavigationData();
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: <setting meta colors requires the use of dangerouslySetInnerHTML>
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.querySelector('meta[name="theme-color"]').setAttribute('content', '${META_THEME_COLORS.dark}')
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
+        <meta content={META_THEME_COLORS.light} name="theme-color" />
+      </head>
       <body className={`${fontGalaxieCopernicus.variable} antialiased`}>
         <Providers>
           <Navbar navbarData={null} settingsData={nav.settingsData} />
-          <ScrollToTopButton />
           {children}
-          {/* Sanity Footer */}
           <Suspense fallback={<FooterSkeleton />}>
             <Footer />
           </Suspense>
-          {/* Default Footer */}
-          {/* <div className="mb-8"> */}
-          {/* <div className="mb-2 text-center font-semibold text-lg">
-              Default Footer
-            </div> */}
-          {/* <JambFooter footerData={DEFAULT_FOOTER_DATA} /> */}
-          {/* </div> */}
-          {/* Test Footers */}
-          {/* {ALL_TEST_FOOTERS.map((testFooter) => (
-            <div className="mb-8" key={testFooter.data._id}>
-              <div className="mb-2 text-center font-semibold text-lg">
-                Test: {testFooter.name}
-              </div>
-              <JambFooter footerData={testFooter.data} />
-            </div>
-          ))} */}
-          {/* <Suspense fallback={<FooterSkeleton />}>
-            <FooterServer />
-          </Suspense> */}
           <SanityLive />
+          <ScrollToTopButton />
           <CustomScrollbar />
           <CombinedJsonLd includeOrganization includeWebsite />
           {(await draftMode()).isEnabled && (
