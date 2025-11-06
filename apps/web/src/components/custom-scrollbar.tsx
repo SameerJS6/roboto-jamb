@@ -124,7 +124,7 @@ function Scrollbar() {
 
   return (
     <div
-      className="fixed top-0 right-0 z-[1000] h-[calc(100dvh-1rem)] w-16"
+      className="fixed top-0 right-0 z-9999999 h-[calc(100dvh-1rem)] w-16"
       ref={ref}
     >
       <div className="absolute top-0 right-1 w-4 rounded-full bg-foreground/10 opacity-0 backdrop-blur-4 transition-[width,right,opacity] duration-[200ms] hover:right-2 hover:w-6 hover:bg-foreground/20" />
