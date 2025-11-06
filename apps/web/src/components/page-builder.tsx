@@ -90,6 +90,7 @@ function useOptimisticPageBuilder(
   initialBlocks: PageBuilderBlock[],
   documentId: string
 ) {
+  // biome-ignore lint/suspicious/noExplicitAny: <any is used to bypass type checking>
   return useOptimistic<PageBuilderBlock[], any>(
     initialBlocks,
     (currentBlocks, action) => {
@@ -141,6 +142,7 @@ function useBlockRenderer(
             data-sanity={createBlockDataAttribute(block._key)}
             key={`${block._type}-${block._key}`}
           >
+            {/** biome-ignore lint/suspicious/noExplicitAny: <any is used to bypass type checking> */}
             <Component {...(block as any)} allBlocks={blocks} />
           </div>
         );
@@ -151,6 +153,7 @@ function useBlockRenderer(
           data-sanity={createBlockDataAttribute(block._key)}
           key={`${block._type}-${block._key}`}
         >
+          {/** biome-ignore lint/suspicious/noExplicitAny: <any is used to bypass type checking> */}
           <Component {...(block as any)} />
         </div>
       );

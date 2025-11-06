@@ -116,7 +116,7 @@ export type Button = {
 export type RichText = Array<
   | {
       children?: Array<{
-        marks?: Array<string>;
+        marks?: string[];
         text?: string;
         _type: "span";
         _key: string;
@@ -418,7 +418,7 @@ export type AssistInstructionContext = {
   title?: string;
   context?: Array<{
     children?: Array<{
-      marks?: Array<string>;
+      marks?: string[];
       text?: string;
       _type: "span";
       _key: string;
@@ -441,7 +441,7 @@ export type SanityAssistInstructionUserInput = {
 export type SanityAssistInstructionPrompt = Array<{
   children?: Array<
     | {
-        marks?: Array<string>;
+        marks?: string[];
         text?: string;
         _type: "span";
         _key: string;
@@ -943,7 +943,7 @@ export type QuerySlugPageDataResult = {
 } | null;
 // Variable: querySlugPagePaths
 // Query: *[_type == "page" && defined(slug.current)].slug.current
-export type QuerySlugPagePathsResult = Array<string>;
+export type QuerySlugPagePathsResult = string[];
 // Variable: queryHomePageOGData
 // Query: *[_type == "homePage" && _id == $id][0]{      _id,  _type,  "title": select(    defined(ogTitle) => ogTitle,    defined(seoTitle) => seoTitle,    title  ),  "description": select(    defined(ogDescription) => ogDescription,    defined(seoDescription) => seoDescription,    description  ),  "image": image.asset->url + "?w=566&h=566&dpr=2&fit=max",  "dominantColor": image.asset->metadata.palette.dominant.background,  "seoImage": seoImage.asset->url + "?w=1200&h=630&dpr=2&fit=max",  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max&q=100",  "date": coalesce(date, _createdAt)  }
 export type QueryHomePageOGDataResult = {
@@ -1139,7 +1139,7 @@ export type QueryRedirectsResult = Array<{
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
-  interface SanityQueries {
+  type SanityQueries = {
     '\n  *[_type == "page" && defined(image)][0]{\n    \n  image {\n    \n  "id": asset._ref,\n  "preview": asset->metadata.lqip,\n  hotspot {\n    x,\n    y\n  },\n  crop {\n    bottom,\n    left,\n    right,\n    top\n  }\n\n  }\n\n  }.image\n': QueryImageTypeResult;
     '*[_type == "homePage" && _id == "homePage"][0]{\n    ...,\n    _id,\n    _type,\n    "slug": slug.current,\n    title,\n    description,\n    \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "hero" => {\n    ...,\n    \n  image {\n    \n  "id": asset._ref,\n  "preview": asset->metadata.lqip,\n  hotspot {\n    x,\n    y\n  },\n  crop {\n    bottom,\n    left,\n    right,\n    top\n  }\n\n  }\n,\n  }\n,\n    \n  _type == "imageGrid" => {\n    ...,\n    backgroundColor,\n    customBackgroundColor,\n    imageFill,\n    title,\n    allowNavigation,\n    maxDescriptionLength,\n    "features": array::compact(features[]{\n      ...,\n      image {\n        \n  "id": asset._ref,\n  "preview": asset->metadata.lqip,\n  hotspot {\n    x,\n    y\n  },\n  crop {\n    bottom,\n    left,\n    right,\n    top\n  }\n,\n        alt\n      }\n    }),\n  }\n,\n    \n  _type == "splitFeatureSection" => {\n    ...,\n    customBackgroundColor,\n    image {\n      \n  "id": asset._ref,\n  "preview": asset->metadata.lqip,\n  hotspot {\n    x,\n    y\n  },\n  crop {\n    bottom,\n    left,\n    right,\n    top\n  }\n,\n      alt\n    },\n    desktopLayoutDirection,\n    mobileLayoutDirection,\n    allowNavigation,\n    navigationSlugField,\n    title,\n    headline,\n    \n  buttons[]{\n    text,\n    variant,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n\n  }\n\n  }': QueryHomePageDataResult;
     '\n  *[_type == "page" && slug.current == $slug][0]{\n    ...,\n    "slug": slug.current,\n    \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "hero" => {\n    ...,\n    \n  image {\n    \n  "id": asset._ref,\n  "preview": asset->metadata.lqip,\n  hotspot {\n    x,\n    y\n  },\n  crop {\n    bottom,\n    left,\n    right,\n    top\n  }\n\n  }\n,\n  }\n,\n    \n  _type == "imageGrid" => {\n    ...,\n    backgroundColor,\n    customBackgroundColor,\n    imageFill,\n    title,\n    allowNavigation,\n    maxDescriptionLength,\n    "features": array::compact(features[]{\n      ...,\n      image {\n        \n  "id": asset._ref,\n  "preview": asset->metadata.lqip,\n  hotspot {\n    x,\n    y\n  },\n  crop {\n    bottom,\n    left,\n    right,\n    top\n  }\n,\n        alt\n      }\n    }),\n  }\n,\n    \n  _type == "splitFeatureSection" => {\n    ...,\n    customBackgroundColor,\n    image {\n      \n  "id": asset._ref,\n  "preview": asset->metadata.lqip,\n  hotspot {\n    x,\n    y\n  },\n  crop {\n    bottom,\n    left,\n    right,\n    top\n  }\n,\n      alt\n    },\n    desktopLayoutDirection,\n    mobileLayoutDirection,\n    allowNavigation,\n    navigationSlugField,\n    title,\n    headline,\n    \n  buttons[]{\n    text,\n    variant,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n\n  }\n\n  }\n  ': QuerySlugPageDataResult;
@@ -1154,5 +1154,5 @@ declare module "@sanity/client" {
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    siteTitle,\n    logo {\n      \n  "id": asset._ref,\n  "preview": asset->metadata.lqip,\n  hotspot {\n    x,\n    y\n  },\n  crop {\n    bottom,\n    left,\n    right,\n    top\n  }\n\n    },\n    siteDescription,\n    socialLinks{\n      linkedin,\n      facebook,\n      twitter,\n      instagram,\n      youtube\n    }\n  }\n': QueryGlobalSeoSettingsResult;
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    siteTitle,\n    siteDescription,\n    "logo": logo.asset->url + "?w=80&h=40&dpr=3&fit=max&q=100",\n    "contactEmail": contactEmail,\n  }\n': QuerySettingsDataResult;
     '\n  *[_type == "redirect" && status == "active" && defined(source.current) && defined(destination.current)]{\n    "source":source.current,\n    "destination":destination.current,\n    "permanent" : permanent == "true"\n  }\n': QueryRedirectsResult;
-  }
+  };
 }

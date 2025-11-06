@@ -13,6 +13,12 @@ import {
 
 export const runtime = "edge";
 
+const FONT_WEIGHT_REGULAR = 400;
+const FONT_WEIGHT_BOLD = 700;
+const FONT_WEIGHT_SEMI_BOLD = 600;
+
+const FONT_URL_REGEX = /url\(([^)]+)\)/;
+
 const errorContent = (
   <div tw="flex flex-col w-full h-full items-center justify-center">
     <div tw=" flex w-full h-full items-center justify-center ">
@@ -114,16 +120,12 @@ const dominantColorSeoImageRender = ({
               tw="w-full h-full rounded-3xl shadow-2xl"
               width={566}
             />
-          ) : logo ? (
-            <div tw="flex items-center justify-center h-full w-full">
-              <img alt="Logo" height={400} src={logo} width={400} />
-            </div>
           ) : (
             <div tw="flex items-center justify-center h-full w-full">
               <img
-                alt="Logo"
+                alt={logo ? "Logo" : "Placeholder"}
                 height={400}
-                src={"https://picsum.photos/566/566"}
+                src={logo || "https://picsum.photos/566/566"}
                 width={400}
               />
             </div>
@@ -152,7 +154,7 @@ async function getTtfFont(
   );
 
   const css = await cssCall.text();
-  const ttfUrl = css.match(/url\(([^)]+)\)/)?.[1];
+  const ttfUrl = css.match(FONT_URL_REGEX)?.[1];
 
   if (!ttfUrl) {
     throw new Error("Failed to extract font URL from CSS");
@@ -169,9 +171,9 @@ const getOptions = async ({
   height: number;
 }): Promise<ImageResponseOptions> => {
   const [interRegular, interBold, interSemiBold] = await Promise.all([
-    getTtfFont("Inter", ["wght"], [400]),
-    getTtfFont("Inter", ["wght"], [700]),
-    getTtfFont("Inter", ["wght"], [600]),
+    getTtfFont("Inter", ["wght"], [FONT_WEIGHT_REGULAR]),
+    getTtfFont("Inter", ["wght"], [FONT_WEIGHT_BOLD]),
+    getTtfFont("Inter", ["wght"], [FONT_WEIGHT_SEMI_BOLD]),
   ]);
   return {
     width,
@@ -181,19 +183,19 @@ const getOptions = async ({
         name: "Inter",
         data: interRegular,
         style: "normal",
-        weight: 400,
+        weight: FONT_WEIGHT_REGULAR,
       },
       {
         name: "Inter",
         data: interBold,
         style: "normal",
-        weight: 700,
+        weight: FONT_WEIGHT_BOLD,
       },
       {
         name: "Inter",
         data: interSemiBold,
         style: "normal",
-        weight: 600,
+        weight: FONT_WEIGHT_SEMI_BOLD,
       },
     ],
   };

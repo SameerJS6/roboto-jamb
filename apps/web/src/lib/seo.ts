@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import type { Maybe } from "@/types";
 import { capitalize, getBaseUrl } from "@/utils";
 
+const LEADING_SLASH_REGEX = /^\//;
+
 // Site-wide configuration interface
 type SiteConfig = {
   title: string;
@@ -76,7 +78,7 @@ function extractTitle({
     return pageTitle;
   }
   if (slug && slug !== "/") {
-    return capitalize(slug.replace(/^\//, ""));
+    return capitalize(slug.replace(LEADING_SLASH_REGEX, ""));
   }
   return siteTitle;
 }
