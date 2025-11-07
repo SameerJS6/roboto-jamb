@@ -12,11 +12,6 @@ A Next.js + Sanity Assignment by Roboto Studio.
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js >= 20
-- pnpm package manager
-
 ### Installation
 
 1. **Clone the repository**
