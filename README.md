@@ -12,17 +12,12 @@ A Next.js + Sanity Assignment by Roboto Studio.
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js >= 20
-- pnpm package manager
-
 ### Installation
 
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/SameerJS6/roboto-jamb.git
    cd roboto-jamb
    ```
 
@@ -61,7 +56,16 @@ A Next.js + Sanity Assignment by Roboto Studio.
 
    > **Note**: Get your Sanity project ID and dataset from [sanity.io/manage](https://sanity.io/manage). Generate API tokens in your Sanity project settings.
 
-4. **Start the development servers**
+4. **Seed the database**
+
+   > **Note**: This step is required to populate your Sanity dataset with initial content and media for the application to function properly.
+
+   ```bash
+   cd apps/studio
+   npx sanity dataset import ./production.tar.gz production --replace
+   ```
+
+5. **Start the development servers**
 
    ```bash
    pnpm dev
@@ -69,7 +73,7 @@ A Next.js + Sanity Assignment by Roboto Studio.
 
    This will start both the Next.js app (http://localhost:3000) and Sanity Studio (http://localhost:3333).
 
-5. **Access the applications**
+6. **Access the applications**
 
    - **Next.js App**: http://localhost:3000
    - **Sanity Studio**: http://localhost:3333
